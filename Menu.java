@@ -1,3 +1,4 @@
+import Classes.*;
 import java.util.Scanner;
 // ---------------------------------------------------------------------------------------------------- //
 public class Menu {
@@ -20,13 +21,11 @@ public class Menu {
         String input = scanner.nextLine();
 
         if (input.equals("1")) {
-            String username = GetUsername();
-            boolean passCheck = GetPassword(username);
-
-            if (passCheck) { return true; }
+            User user = GetUser();
+            if (user != null) { return GetPassword(user); }
         }
         else if (input.equals("2")) {
-            String username = GetUsername();
+            User user = GetUser();
             // RUN PasswordCreate() METHOD: String password = SetPassword();
         }
 
@@ -63,18 +62,39 @@ public class Menu {
         return true;
     }
     // ---------------------------------------------------------------------------------------------------- //
-    public static String GetUsername() {
-        System.out.print("Username: ");
-        String input = scanner.next();
-        // RUN CHECKS
-        return input;
+    public static User GetUser() {
+        while (true) {
+            System.out.print("Email: ");
+            String input = scanner.next();
+
+            if (input.equals("exit")) { return null; }
+            else {
+                User user = Data.Get().GetTechy(input);
+
+                if (user == null) {
+                    WriteError("Email Not Found");
+                    System.out.println("Enter 'exit' to Quit");
+                }
+                else { return user; }
+            }
+        }
     }
 
-    public static boolean GetPassword(String user) {
-        System.out.print("Password: ");
-        String input = scanner.next();
-        // RUN CHECKS
-        return true;
+    public static boolean GetPassword(User user) {
+        while (true) {
+            System.out.print("Password: ");
+            String input = scanner.next();
+
+            if (input.equals("exit")) { return false; }
+            else if (input.equals(user.GetPassword())) { 
+                Data.Get().SetUser(user);
+                return true;
+            }
+            else { 
+                WriteError("Password Is Incorrect"); 
+                System.out.println("Enter 'exit' to Quit");
+            }
+        }
     }
     // ---------------------------------------------------------------------------------------------------- //
     public static void WriteError(String msg) {

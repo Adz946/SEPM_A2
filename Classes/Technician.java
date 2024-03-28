@@ -35,4 +35,10 @@ public class Technician extends User {
         }
     }
     // ---------------------------------------------------------------------------------------------------- //
+    public void ToString() {
+        System.out.println(
+            "Name: " + this.GetName() + " | Email: " + this.GetEmail() + " | Mobile: " + this.GetMobile() + " | Password: " + this.GetPassword() + " | Level: " + this.TechLevel()
+        );
+    }
+    // ---------------------------------------------------------------------------------------------------- //
 }
