@@ -3,7 +3,7 @@ public class Main {
         Menu menu = new Menu();
         FileHandling fileHandling = new FileHandling();
         
-        fileHandling.SetUp_Techs();
+        fileHandling.SetUp();
         boolean menuCheck = false;
         
         while (true) {

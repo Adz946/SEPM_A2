@@ -1,29 +1,59 @@
 package Classes;
 // ---------------------------------------------------------------------------------------------------- //
 public class Ticket {
-    enum Status { OPEN, CLOSED }
     enum Severity { LOW, MEDIUM, HIGH }
+    enum Status { OPEN, RESOLVED, UNRESOLVED, ARCHIVED }
     // ---------------------------------------------------------------------------------------------------- //
-    private final int ID;
-    private Status status;
-    private Severity severity;
+    private final String ID;
+    private final String user;
+
+    private String techy;
+    private Status status;    
+    private Severity severity;     
     // ---------------------------------------------------------------------------------------------------- //
-    public Ticket(int ID, String severity) {
-        this.ID = ID;
+    public Ticket(int ID, String umail, String tmail, String severity) {
+        this.ID = "T-" + ID;
+        this.user = umail;
+        this.techy = tmail;
         this.status = Status.OPEN;
 
-        if (severity.equals("low")) { this.severity = Severity.LOW; }
-        else if (severity.equals("medium")) { this.severity = Severity.MEDIUM; }
-        else if (severity.equals("high")) { this.severity = Severity.HIGH; }
+        if (severity.equals("low")) { LowSeverity(); }
+        else if (severity.equals("high")) { HighSeverity(); }
+        else if (severity.equals("medium")) { MediumSeverity(); }    
     }
     // ---------------------------------------------------------------------------------------------------- //
-    public int GetID() { return this.ID; }
-    public void CloseTicket() { this.status = Status.CLOSED; }
+    public String GetID() { return this.ID; }
+    public String Getuser() { return this.user; }
+    public String GetTechy() { return this.techy; }
 
-    public void SetSeverity(String severity) {
-        if (severity.equals("low")) { this.severity = Severity.LOW; }
-        else if (severity.equals("medium")) { this.severity = Severity.MEDIUM; }
-        else if (severity.equals("high")) { this.severity = Severity.HIGH; }
+    public String GetSeverity() {
+        switch (this.severity) {
+            case LOW: return "LOW";
+            case HIGH: return "HIGH";
+            case MEDIUM: return "MEDIUM";
+        }
+        return null;
     }
+    
+    public String GetStatus() {
+        switch (this.status) {
+            case OPEN: return "OPEN";
+            case ARCHIVED: return "ARCHIVED";
+            case RESOLVED: return "RESOLVED";
+            case UNRESOLVED: return "UNRESOLVED";
+        }
+        return null;
+    }
+    // ---------------------------------------------------------------------------------------------------- //
+    public void SetTechy(String tmail) { this.techy = tmail; }
+
+    public void LowSeverity() { this.severity = Severity.LOW; }
+    public void HighSeverity() { this.severity = Severity.HIGH; }
+    public void MediumSeverity() { this.severity = Severity.MEDIUM; }
+
+    public void ReopenTicket() { this.status = Status.OPEN; }
+    public void ArchiveTicket() { this.status = Status.ARCHIVED; }
+    public void TicketResolved() { this.status = Status.RESOLVED; }
+    public void TicketUnresolved() { this.status = Status.UNRESOLVED; }
     // ---------------------------------------------------------------------------------------------------- //
 }

@@ -14,8 +14,9 @@ public class Menu {
     public boolean LogInMenu() {
         System.out.println("""
             [1] Log In
-            [2] Forgot Password
-            [3] Exit
+            [2] Register
+            [3] Forgot Password
+            [4] Exit
             """);
         System.out.print(" >> ");
         String input = scanner.nextLine();
@@ -25,20 +26,24 @@ public class Menu {
             if (user != null) { return GetPassword(user); }
         }
         else if (input.equals("2")) {
-            User user = GetUser();
+            // RUN Registration() Methods
+            System.out.println("REGISTER");
+        }
+        else if (input.equals("3")) {
             // RUN PasswordCreate() METHOD: String password = SetPassword();
+            System.out.println("FOROGT PASSWORD");
         }
 
-        else if (input.equals("3")) { ExitProgram(); }
-        else { WriteError("Error: Choose Between Options 1 To 3"); }
+        else if (input.equals("4")) { ExitProgram(); }
+        else { WriteError("Error: Choose Between Options 1 To 4"); }
 
         return false;
     }
     // ---------------------------------------------------------------------------------------------------- //
     public boolean MainMenu() {
         System.out.println("""
-            [1] Stuff... 1
-            [2] Stuff... 2
+            [1] View Open Tickets
+            [2] Create New Ticket
             [3] Stuff... 3
             [4] Log Out
             [5] Exit
@@ -69,7 +74,7 @@ public class Menu {
 
             if (input.equals("exit")) { return null; }
             else {
-                User user = Data.Get().GetTechy(input);
+                User user = Data.Get().GetUser(input);
 
                 if (user == null) {
                     WriteError("Email Not Found");

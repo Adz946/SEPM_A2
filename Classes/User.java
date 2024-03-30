@@ -23,4 +23,10 @@ public class User {
     public String GetMobile() { return this.mobile; }
     public String GetPassword() { return this.password; }
     // ---------------------------------------------------------------------------------------------------- //
+    public void ToString() {
+        System.out.println(
+            "Name: " + this.GetName() + " | Email: " + this.GetEmail() + " | Mobile: " + this.GetMobile() + " | Password: " + this.GetPassword()
+        );
+    }
+    // ---------------------------------------------------------------------------------------------------- //
 }
