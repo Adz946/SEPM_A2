@@ -5,16 +5,17 @@ public class Ticket {
     enum Status { OPEN, RESOLVED, UNRESOLVED, ARCHIVED }
     // ---------------------------------------------------------------------------------------------------- //
     private final String ID;
-    private final String user;
+    private final String sMail;
 
-    private String techy;
+    private String tMail;
     private Status status;    
     private Severity severity;     
+    // sMail == Staff Email | tMail == Technician Email
     // ---------------------------------------------------------------------------------------------------- //
-    public Ticket(int ID, String umail, String tmail, String severity) {
+    public Ticket(int ID, String sMail, String tMail, String severity) {
         this.ID = "T-" + ID;
-        this.user = umail;
-        this.techy = tmail;
+        this.sMail = sMail;
+        this.tMail = tMail;
         this.status = Status.OPEN;
 
         if (severity.equals("low")) { LowSeverity(); }
@@ -23,8 +24,8 @@ public class Ticket {
     }
     // ---------------------------------------------------------------------------------------------------- //
     public String GetID() { return this.ID; }
-    public String Getuser() { return this.user; }
-    public String GetTechy() { return this.techy; }
+    public String GetStaff() { return this.sMail; }
+    public String GetTechy() { return this.tMail; }
 
     public String GetSeverity() {
         switch (this.severity) {
@@ -45,7 +46,7 @@ public class Ticket {
         return null;
     }
     // ---------------------------------------------------------------------------------------------------- //
-    public void SetTechy(String tmail) { this.techy = tmail; }
+    public void SetTechy(String tMail) { this.tMail = tMail; }
 
     public void LowSeverity() { this.severity = Severity.LOW; }
     public void HighSeverity() { this.severity = Severity.HIGH; }

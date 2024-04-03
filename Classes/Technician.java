@@ -2,7 +2,7 @@ package Classes;
 import java.util.HashMap;
 import java.util.Collection;
 // ---------------------------------------------------------------------------------------------------- //
-public class Technician extends User {
+public class Technician extends Staff {
     private final int level;
     private HashMap<String, Ticket> Tickets;
     // ---------------------------------------------------------------------------------------------------- //

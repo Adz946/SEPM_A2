@@ -6,7 +6,7 @@ public class Data {
     // ---------------------------------------------------------------------------------------------------- //
     private static Data INSTANCE;
     private Data() {
-        Users = new HashMap<String, User>();
+        Staff = new HashMap<String, Staff>();
         Techies = new HashMap<String, Technician>();
     }
 
@@ -15,16 +15,16 @@ public class Data {
         return INSTANCE;
     }
 
-    private User ActiveUser;
-    public void SetUser(User u) { ActiveUser = u; }
-    public User GetUser(User u) { return ActiveUser; }
+    private Staff ActiveStaff;
+    public void SetStaff(Staff u) { ActiveStaff = u; }
+    public Staff GetStaff(Staff u) { return ActiveStaff; }
     // ---------------------------------------------------------------------------------------------------- //
-    private static HashMap<String, User> Users;
-    public void AddUser(User u) { Users.put(u.GetEmail(), u); }
-    public void RemoveUser(String email) { Users.remove(email); }  
+    private static HashMap<String, Staff> Staff;
+    public void AddStaff(Staff u) { Staff.put(u.GetEmail(), u); }
+    public void RemoveStaff(String email) { Staff.remove(email); }  
 
-    public User GetUser(String email) { return Users.get(email); }
-    public Collection<User> GetAllUsers() { return Users.values(); }
+    public Staff GetStaff(String email) { return Staff.get(email); }
+    public Collection<Staff> GetAllStaff() { return Staff.values(); }
     // ---------------------------------------------------------------------------------------------------- //
     private static HashMap<String, Technician> Techies;
     public void AddTechy(Technician t) { Techies.put(t.GetEmail(), t); }
