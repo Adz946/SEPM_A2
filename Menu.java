@@ -28,11 +28,11 @@ public class Menu {
         String input = scanner.nextLine();
 
         if (input.equals("1")) {
-            User user = GetUser();
-            if (user != null) { return GetPassword(user); }
+            Staff staff = GetStaff();
+            if (staff != null) { return GetPassword(staff); }
         }
         else if (input.equals("2")) {
-            Registration();
+            // RUN Registration() Methods
             System.out.println("REGISTER");
         }
         else if (input.equals("3")) {
@@ -73,32 +73,32 @@ public class Menu {
         return true;
     }
     // ---------------------------------------------------------------------------------------------------- //
-    public static User GetUser() {
+    public static Staff GetStaff() {
         while (true) {
             System.out.print("Email: ");
             String input = scanner.next();
 
             if (input.equals("exit")) { return null; }
             else {
-                User user = Data.Get().GetUser(input);
+                Staff staff = Data.Get().GetStaff(input);
 
-                if (user == null) {
+                if (staff == null) {
                     WriteError("Email Not Found");
                     System.out.println("Enter 'exit' to Quit");
                 }
-                else { return user; }
+                else { return staff; }
             }
         }
     }
 
-    public static boolean GetPassword(User user) {
+    public static boolean GetPassword(Staff staff) {
         while (true) {
             System.out.print("Password: ");
             String input = scanner.next();
 
             if (input.equals("exit")) { return false; }
-            else if (input.equals(user.GetPassword())) { 
-                Data.Get().SetUser(user);
+            else if (input.equals(staff.GetPassword())) { 
+                Data.Get().SetStaff(staff);
                 return true;
             }
             else { 
@@ -113,7 +113,7 @@ public class Menu {
         // RED BACKGROUND: \u001B[41m | WHITE TEXT: \u001B[37m | RESET: \u001B[0m
     }
     // ---------------------------------------------------------------------------------------------------- //
-
+}
     public static void Registration() {
         System.out.println("Welcome to User Registration");
 
