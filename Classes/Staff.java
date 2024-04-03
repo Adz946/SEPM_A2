@@ -1,12 +1,12 @@
 package Classes;
 // ---------------------------------------------------------------------------------------------------- //
-public class User {
+public class Staff {
     private String name;
     private String email;
     private String mobile;
     private String password;
     // ---------------------------------------------------------------------------------------------------- //
-    public User(String name, String email, String mobile, String password) {
+    public Staff(String name, String email, String mobile, String password) {
         this.name = name;
         this.email = email;
         this.mobile = mobile;
