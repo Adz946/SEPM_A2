@@ -10,7 +10,7 @@ public class Main {
             if (menuCheck) { menuCheck = menu.MainMenu(); }
             else { menuCheck = menu.LogInMenu(); }
 
-            for (int i = 0; i < 50; i++) { System.out.print("-"); }
+            for (int i = 0; i < 75; i++) { System.out.print("-"); }
             System.out.println();
         }
     }
