@@ -61,7 +61,7 @@ public class Menu {
 
         }
         else if (input.equals("2")) {
-            
+            createNewTicket();
         }
         else if (input.equals("3")) {
             
@@ -72,6 +72,48 @@ public class Menu {
 
         return true;
     }
+    // ---------------------------------------------------------------------------------------------------- //
+    private void createNewTicket() {
+		System.out.println("""
+				[1] Enter Ticket Details
+				[2] Back to Main Menu
+				""");
+		System.out.print(">>");
+		String input = scanner.next();
+		
+		if (input.equals("1")) {
+			System.out.print("Enter Ticket Title: ");
+	        String title = scanner.next();
+	        
+	        System.out.println("Enter Ticket Description: ");
+			String description = scanner.next();
+			
+			System.out.print("Choose Severity (LOW, MEDIUM, HIGH): ");
+			String severityString = scanner.next().toUpperCase();
+			
+			Severity severity = null;
+			
+			try {
+				Ticket ticket = new Ticket (title, description, severity);
+				storeTicket(ticket);
+				System.out.println("ticket created successfully!");
+			}catch (Exception e) {
+				WriteError("Error creating ticket: " + e.getMessage());
+			}
+		}else if (!input.equals("2")) {
+			System.out.println("Error: Choose between 1 or 2");
+		}
+    }
+    
+    private javax.print.attribute.standard.Severity Severity(String severityString) {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+    private void storeTicket(Ticket ticket) {
+		// TODO Auto-generated method stub
+		
+	    }
+    
     // ---------------------------------------------------------------------------------------------------- //
     public static Staff GetStaff() {
         while (true) {
