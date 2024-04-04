@@ -1,13 +1,15 @@
 import Classes.*;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Data {
     // ---------------------------------------------------------------------------------------------------- //
     private static Data INSTANCE;
     private Data() {
-        Staff = new HashMap<String, Staff>();
-        Techies = new HashMap<String, Technician>();
+        Staff = new HashMap<>();
+        Techies = new HashMap<>();
+        Tickets = new HashMap<>();
     }
 
     public static synchronized Data Get() {
@@ -16,8 +18,8 @@ public class Data {
     }
 
     private Staff ActiveStaff;
-    public void SetStaff(Staff u) { ActiveStaff = u; }
-    public Staff GetStaff(Staff u) { return ActiveStaff; }
+    public Staff GetActiveStaff() { return ActiveStaff; }
+    public void SetActiveStaff(Staff u) { ActiveStaff = u; }   
     // ---------------------------------------------------------------------------------------------------- //
     private static HashMap<String, Staff> Staff;
     public void AddStaff(Staff u) { Staff.put(u.GetEmail(), u); }
@@ -32,5 +34,26 @@ public class Data {
 
     public Technician GetTechy(String email) { return Techies.get(email); }
     public Collection<Technician> GetAllTechies() { return Techies.values(); }
+    // ---------------------------------------------------------------------------------------------------- //
+    private static HashMap<String, Ticket> Tickets;
+    public void AddTicket(Ticket t) { Tickets.put(t.GetID(), t); }
+    public void RemoveTicket(String ID) { Tickets.remove(ID); }
+
+    public Ticket GetTicket(String ID) { return Tickets.get(ID); }
+    public Collection<Ticket> GetAllTickets() { return Tickets.values(); }
+
+    public ArrayList<Ticket> GetStaffTickets() {
+        ArrayList<Ticket> ReturnTickets = new ArrayList<>();
+
+        for (Ticket ticket : Tickets.values()) {
+            if (ActiveStaff instanceof Technician) {
+                if (ticket.GetStatus().equals("OPEN") && ticket.GetTechy().equals(ActiveStaff.GetEmail())) { ReturnTickets.add(ticket); }
+                else if (!ticket.GetStatus().equals("OPEN")) { ReturnTickets.add(ticket); }
+            }
+            else if (ticket.GetStaff().equals(ActiveStaff.GetEmail()) && ticket.GetStatus().equals("OPEN")) { ReturnTickets.add(ticket); }
+        }
+
+        return ReturnTickets;
+    }
     // ---------------------------------------------------------------------------------------------------- //
 }

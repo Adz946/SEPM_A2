@@ -1,5 +1,4 @@
 import Classes.*;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,17 +47,18 @@ public class Menu {
     // ---------------------------------------------------------------------------------------------------- //
     public boolean MainMenu() {
         System.out.println("""
+            ---------- %s ----------
             [1] View Open Tickets
             [2] Create New Ticket
             [3] Stuff... 3
             [4] Log Out
             [5] Exit
-            """);
+            """.formatted(Data.Get().GetActiveStaff().GetName()));
         System.out.print(" >> ");
         String input = scanner.next();
         
         if (input.equals("1")) {
-
+            for (Ticket ticket : Data.Get().GetStaffTickets()) { ticket.ToString(); }
         }
         else if (input.equals("2")) {
             
@@ -98,7 +98,7 @@ public class Menu {
 
             if (input.equals("exit")) { return false; }
             else if (input.equals(staff.GetPassword())) { 
-                Data.Get().SetStaff(staff);
+                Data.Get().SetActiveStaff(staff);
                 return true;
             }
             else { 
@@ -113,7 +113,6 @@ public class Menu {
         // RED BACKGROUND: \u001B[41m | WHITE TEXT: \u001B[37m | RESET: \u001B[0m
     }
     // ---------------------------------------------------------------------------------------------------- //
-}
     public static void Registration() {
         System.out.println("Welcome to User Registration");
 

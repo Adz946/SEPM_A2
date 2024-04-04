@@ -22,21 +22,14 @@ public class Technician extends Staff {
     // ---------------------------------------------------------------------------------------------------- //
     public void ModifyTicket(String ID, String severity) {
         Ticket ticket = GetTicket(ID);
-
-        if (ticket != null) { 
-            switch (severity) {
-                case "LOW": ticket.LowSeverity();
-                case "HIGH": ticket.HighSeverity();
-                case "MEDIUM": ticket.MediumSeverity();
-            }
-         }
+        if (ticket != null) { ticket.SetSeverity(severity); }
     }
 
     public void CloseTicket(String ID) {
         Ticket ticket = GetTicket(ID);
 
         if (ticket != null) { 
-            ticket.TicketResolved();
+            ticket.SetStatus("RESOLVED");
             RemoveTicket(ID);
         }
     }
