@@ -33,7 +33,7 @@ public class Menu {
             if (staff != null) { return GetPassword(staff); }
         }
         else if (input.equals("2")) {
-            System.out.println("REGISTER");
+            Registration();
         }
         else if (input.equals("3")) {
             String password = forgotPassword();
@@ -155,13 +155,34 @@ public class Menu {
                 System.out.println("Invalid password. Please try again.");
             }
         }
+    System.out.println("\n---------- Registration ----------");
+    System.out.println("Name    : " + name);
+    System.out.println("Email   : " + email);
+    System.out.println("Mobile  : " + formatMobile(mobile));  // Assumes a method to format the mobile number
+    System.out.println("Password: " + "*".repeat(password.length()));
+    System.out.println("[1] Register User");
+    System.out.println("[2] Cancel");
 
+    System.out.print(" >> ");
+    String choice = scanner.nextLine();
+
+    if ("1".equals(choice)) {
         try {
-            registerUser(name, email, mobile, password);
+            registerUser(name, email, mobile, password);  
             System.out.println("Registration successful.");
         } catch (IOException e) {
             System.out.println("An error occurred during registration: " + e.getMessage());
         }
+    } else if ("2".equals(choice)) {
+        System.out.println("Registration cancelled.");
+    } else {
+        System.out.println("Invalid option selected. Registration cancelled.");
+    }
+    }
+    
+    public static String formatMobile(String mobile) {
+        String digitsOnly = mobile.replaceAll("[^\\d]", ""); 
+        return digitsOnly.replaceFirst("(\\d{4})(\\d{3})(\\d+)", "$1 $2 $3");
     }
 
     private static boolean validateEmail(String email) {
@@ -183,8 +204,10 @@ public class Menu {
     }
 
     private static void registerUser(String name, String email, String mobile, String password) throws IOException {
-        try (PrintWriter pw = new PrintWriter(new FileWriter("Data/users.csv", true))) {
-            pw.println(name + "," + email + "," + mobile + "," + password);
+        String formattedMobile = formatMobile(mobile); 
+        String relativePath = "Data/users.csv"; 
+        try (PrintWriter pw = new PrintWriter(new FileWriter(relativePath, true))) {
+            pw.println(name + "," + email + "," + formattedMobile + "," + password);
         }
     }
     // ---------------------------------------------------------------------------------------------------- //
