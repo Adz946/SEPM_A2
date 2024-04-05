@@ -23,10 +23,9 @@ public class Staff {
     public String GetMobile() { return this.mobile; }
     public String GetPassword() { return this.password; }
     // ---------------------------------------------------------------------------------------------------- //
-    public void ToString() {
-        System.out.println(
-            "Name: " + this.GetName() + " | Email: " + this.GetEmail() + " | Mobile: " + this.GetMobile() + " | Password: " + this.GetPassword()
-        );
+    @Override
+    public String toString() {
+        return this.GetName() + "," + this.GetEmail() + "," + this.GetMobile() + "," + this.GetPassword();
     }
     // ---------------------------------------------------------------------------------------------------- //
 }

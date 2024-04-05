@@ -34,10 +34,9 @@ public class Technician extends Staff {
         }
     }
     // ---------------------------------------------------------------------------------------------------- //
-    public void ToString() {
-        System.out.println(
-            "Name: " + this.GetName() + " | Email: " + this.GetEmail() + " | Mobile: " + this.GetMobile() + " | Password: " + this.GetPassword() + " | Level: " + this.TechLevel()
-        );
+    @Override
+    public String toString() {
+        return this.GetName() + "," + this.GetEmail() + "," + this.GetMobile() + "," + this.GetPassword() + "," + this.TechLevel();
     }
     // ---------------------------------------------------------------------------------------------------- //
 }

@@ -1,5 +1,10 @@
+package Functions;
 import Classes.*;
+
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 // ---------------------------------------------------------------------------------------------------- //
@@ -47,6 +52,13 @@ public class FileHandling {
         }
 
         reader.close();
+    }
+    // ---------------------------------------------------------------------------------------------------- //
+    public static void NewStaff(Staff newStaff) throws IOException {
+        FileWriter file = new FileWriter(new File("Data/users.csv"), true);
+        PrintWriter writer = new PrintWriter(file);
+        writer.println(newStaff.toString());
+        writer.close();
     }
     // ---------------------------------------------------------------------------------------------------- //
 }
