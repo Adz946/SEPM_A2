@@ -76,10 +76,13 @@ public class Ticket {
         }
     }
     // ---------------------------------------------------------------------------------------------------- //
-    public void ToString() {
-        System.out.println(
-            "ID: " + GetID() + " | Staff: " + GetStaff() + " | Techy: " + GetTechy() + " | Severity: " + GetSeverity() + " | Status: " + GetStatus() + "\n  Description: " + GetDesc() + "\n"
-        );
+    public void View() {
+        System.out.printf("%-5s | %-30s | %-30s | %-10s | %-10s | %-125s %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetDesc());
+    }
+
+    @Override
+    public String toString() {
+        return this.GetID() + "," + this.GetStaff() + "," + this.GetTechy() + "," + this.GetDesc() + "," + this.GetSeverity() + "," + this.GetStatus();
     }
     // ---------------------------------------------------------------------------------------------------- //
 }
