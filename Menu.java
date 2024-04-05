@@ -159,7 +159,7 @@ public class Menu {
     System.out.println("Name    : " + name);
     System.out.println("Email   : " + email);
     System.out.println("Mobile  : " + formatMobile(mobile));  // Assumes a method to format the mobile number
-    System.out.println("Password: " + "*".repeat(password.length()));
+    System.out.println("Password: " + password);
     System.out.println("[1] Register User");
     System.out.println("[2] Cancel");
 
