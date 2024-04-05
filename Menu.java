@@ -1,4 +1,6 @@
 import Classes.*;
+
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,14 +33,16 @@ public class Menu {
             if (staff != null) { return GetPassword(staff); }
         }
         else if (input.equals("2")) {
-            // RUN Registration() Methods
             System.out.println("REGISTER");
         }
         else if (input.equals("3")) {
-            // RUN PasswordCreate() METHOD: String password = SetPassword();
-            System.out.println("FOROGT PASSWORD");
-        }
-
+            String password = forgotPassword();
+            if (password != null) {
+                System.out.println("Password found: " + password);
+            } else {
+                System.out.println("Mobile number not found or an error occurred.");
+            }}
+       
         else if (input.equals("4")) { ExitProgram(); }
         else { WriteError("Error: Choose Between Options 1 To 4"); }
 
@@ -182,5 +186,31 @@ public class Menu {
         try (PrintWriter pw = new PrintWriter(new FileWriter("Data/users.csv", true))) {
             pw.println(name + "," + email + "," + mobile + "," + password);
         }
+    }
+    // ---------------------------------------------------------------------------------------------------- //
+    public static String forgotPassword() {
+        System.out.print("Enter your mobile number to retrieve your password: ");
+        String mobileInput = scanner.nextLine();
+    
+        String sanitizedMobileInput = mobileInput.replaceAll("[^\\d]", "");
+    
+        String relativePath = "Data/users.csv"; 
+        String line;
+        String[] data;
+    
+        try (Scanner fileScanner = new Scanner(new FileReader(relativePath))) {
+            while (fileScanner.hasNextLine()) {
+                line = fileScanner.nextLine();
+                data = line.split(",");
+    
+                if (data.length > 2 && data[2].replaceAll("[^\\d]", "").equals(sanitizedMobileInput)) {
+                    return data[3];
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while trying to retrieve the password: " + e.getMessage());
+        }
+    
+        return null;
     }
 }
