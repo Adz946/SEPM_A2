@@ -41,11 +41,7 @@ public class ForgotPass {
     public int Menu() {
         if (staff == null) { MobileInput(EmailInput()); }
 
-        System.out.println("""
-            ---------- Forgot Password ----------
-            [1] Reset Password
-            [2] Go Back
-            """);
+        System.out.println("---------- Forgot Password ----------\n[1] Reset Password\n[2] Go Back");
         System.out.print(" >> ");
         String input = InputReader.Get().nextLine();
 

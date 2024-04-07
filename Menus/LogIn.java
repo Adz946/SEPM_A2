@@ -4,13 +4,11 @@ import Classes.Staff;
 
 public class LogIn {
     public int Menu() {
-        System.out.println("""
-            ---------- Log In ----------
-            [1] Log In
-            [2] Register
-            [3] Forgot Password
-            [4] Exit
-            """);
+        System.out.println("---------- Log In ---------- \n" +
+            "[1] Log In \n" +
+            "[2] Register \n" +
+            "[3] Forgot Password \n" +
+            "[4] Exit");
         System.out.print(" >> ");
         String input = InputReader.Get().nextLine();
 

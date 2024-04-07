@@ -3,13 +3,11 @@ import Functions.*;
 
 public class Home {
     public int Menu() {
-        System.out.println("""
-            ---------- %s ----------
-            [1] View Tickets
-            [2] Open Ticket
-            [3] Log Out
-            [4] Exit
-            """.formatted(Data.Get().GetActiveStaff().GetName()));
+        System.out.printf("---------- %s ---------- \n" +
+           "[1] View Tickets \n" +
+           "[2] Open Ticket \n" +
+           "[3] Log Out \n" +
+           "[4] Exit \n", Data.Get().GetActiveStaff().GetName());
         System.out.print(" >> ");
         String input = InputReader.Get().nextLine();
 
