@@ -16,7 +16,7 @@ public class FileHandling {
     }
 
     private void UserReader() throws Exception {
-        String normalizedPath = Paths.get("./Data_/users.csv").normalize().toString();
+        String normalizedPath = Paths.get("./Data/users.csv").normalize().toString();
         File file = new File(normalizedPath);
 
         if (file.exists()) { 
@@ -47,6 +47,11 @@ public class FileHandling {
             Data.Get().AddTechy(new Technician("Zayn Malik", "z.malik@company.com", "0455 666 777", "_Malik-Al-Igbeer_45?", 2));
 
             // Staff Hard-coded
+            Data.Get().AddStaff(new Staff("Harry Styles", "h.styles@company.com", "0411 222 333", "01234_xX_StyleS_Xx_56789"));
+            Data.Get().AddStaff(new Staff("Niall Horan", "n.horan@company.com", "0422 333 444", "0_Xx_xX__HORAN__Xx_xX_0"));
+            Data.Get().AddStaff(new Staff("Liam Payne", "l.payne@company.com", "0433 444 555", "XxXx_xXxX__PaYnE__XxXx_xXxX"));
+            Data.Get().AddStaff(new Staff("Louis Tomlinson", "l.tomlinson@company.com", "0444 555 666", "21!_Jumbo_Junior_!12"));
+            Data.Get().AddStaff(new Staff("Zayn Malik", "z.malik@company.com", "0455 666 777", "_Malik-Al-Igbeer_45?"));
             Data.Get().AddStaff(new Staff("Sam Syne", "s.syne@company.com", "0466 777 888", "01234ABCDE56789fghij"));
             Data.Get().AddStaff(new Staff("Juliet Jameson", "j.jameson@company.com", "0477 888 999", "abcde01234FGHIJ56789"));
             Data.Get().AddStaff(new Staff("Jacob Heru", "j.heru@company.com", "0488 999 000", "SecretPassword_No0neCanGuess_THIS"));
@@ -55,7 +60,7 @@ public class FileHandling {
 
     private void TicketReader() throws Exception {
         Pattern LINE_PATTERN = Pattern.compile(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-        String normalizedPath = Paths.get("./Data_/tickets.csv").normalize().toString();
+        String normalizedPath = Paths.get("./Data/tickets.csv").normalize().toString();
         File file = new File(normalizedPath);
 
         if (file.exists()) {
@@ -90,7 +95,7 @@ public class FileHandling {
     }
     // ---------------------------------------------------------------------------------------------------- //
     public static void NewStaff(Staff newStaff) throws IOException {
-        String normalizedPath = Paths.get("./Data_/users.csv").normalize().toString();
+        String normalizedPath = Paths.get("./Data/users.csv").normalize().toString();
         File file = new File(normalizedPath);
 
         if (file.exists()) {
