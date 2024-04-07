@@ -17,11 +17,11 @@ Welcome to TicketApp! This guide provides step-by-step instructions on how to st
 ## Getting Started
  
 To start the application:
- 
-TODO: John building a .exe file
-1. Ensure Java is installed on your system. The application requires Java to run.
-2. Navigate to the directory containing the application files in your terminal or command prompt.
-3. Run the application by executing the command `java Main`.
+
+1. Ensure Java Runtime Environment is installed on your system. The application requires JRE 1.8 to run.
+2. Copy the Main.jar file to your desired path. e.g. H:\ 
+3. Open the windows 'Run' window by typing Run into the Start menu and select it, or hold Windows Key + R
+4. In the Open box type in: 'java -jar Directory\Main.jar' and press ok where directory is the location you copied it to. E.g. 'java -jar H:\Main.jar'
  
 The application will initialise, performing any necessary setup, and then present you with the main menu.
  
