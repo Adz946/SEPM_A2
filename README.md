@@ -23,7 +23,7 @@ To start the application:
 3. Open the windows 'Run' window by typing Run into the Start menu and select it, or hold Windows Key + R
 4. In the Open box type in: 'java -jar Directory\Main.jar' and press ok where directory is the location you copied it to. E.g. 'java -jar H:\Main.jar'
  
-The application will initialise, performing any necessary setup, and then present you with the main menu.
+The application will initialise and present you with the main menu.
  
 ## Logging In
  
@@ -33,6 +33,14 @@ To log into your account:
 2. When prompted, enter your registered email address. If you wish to cancel, type `exit`.
 3. Next, you will be asked to enter your password. Make sure it meets the required format. To cancel, type `exit`.
 4. If both your email and password are correct, you will be successfully logged into the system.
+
+Example Technician
+User: h.styles@company.com
+Password: 01234_xX_StyleS_Xx_56789
+
+Example Staff
+User: s.syne@company.com
+Password: 01234ABCDE56789fghij
  
 ## Registering a New Account
  
