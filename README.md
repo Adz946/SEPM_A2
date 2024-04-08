@@ -19,9 +19,9 @@ Welcome to TicketApp! This guide provides step-by-step instructions on how to st
 To start the application:
 
 1. Ensure Java Runtime Environment is installed on your system. The application requires JRE 1.8 to run.
-2. Copy the Main.jar file to your desired path. e.g. H:\ 
+2. Copy the Main.jar file, users.csv and tickets.csv to your desired path. e.g. H:\ 
 3. Open the windows 'Run' window by typing Run into the Start menu and select it, or hold Windows Key + R
-4. In the Open box type in: 'java -jar Directory\Main.jar' and press ok where directory is the location you copied it to. E.g. 'java -jar H:\Main.jar'
+4. In the Open box type in: 'java -jar Directory\Main.jar Directory' and press ok where directory is the location you copied it to. E.g. 'java -jar H:\Main.jar H:\'
  
 The application will initialise and present you with the main menu.
  
