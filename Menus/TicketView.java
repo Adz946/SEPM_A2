@@ -10,7 +10,7 @@ public class TicketView {
             System.out.printf("%-5s | %-30s | %-30s | %-10s | %-10s | %-100s %n", "ID", "Staff Sent By", "Technician", "Severity", "Status", "Description");
             for (Ticket ticket : tickets) { ticket.View(); }
         }
-        else System.out.println("No OPEN Tickets Found");
+        else System.out.println("No OPEN Tickets Found");        
 
         System.out.println("Enter 'exit' to Go Back");
         System.out.print(" >> ");
