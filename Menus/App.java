@@ -41,6 +41,7 @@ public class App {
         
         if (fileHandling != null) {
             fileHandling.userWriter();
+            fileHandling.ticketWriter();
         }
         
         InputReader.Close();

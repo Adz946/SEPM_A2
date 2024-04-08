@@ -123,8 +123,28 @@ public class FileHandling {
    }
     
    public void ticketWriter() {
-      //TODO:write to ticket.csv in filehandler path. 
+      Data data = Data.Get();
+      Collection<Ticket> allTickets = data.GetAllTickets();
+      
+      try (FileWriter fileWriter = new FileWriter(basePath + "/tickets.csv", false);
+           PrintWriter printWriter = new PrintWriter(fileWriter)) 
+      {
+              printWriter.println("ID,SMail,TMail,Description,Severity,Status");
+              
+              for (Ticket ticket : allTickets) {
+                  String line = String.format("%s,%s,%s,%s,%s,%s",
+                                              ticket.GetID(),
+                                              ticket.GetStaff(),
+                                              ticket.GetTechy(),
+                                              ticket.GetDesc(),// Escape double quotes in issue text
+                                              ticket.GetSeverity(),
+                                              ticket.GetStatus());
+                  printWriter.println(line);
+              }
+              
+          } catch (IOException e) {
+                System.out.println("An error occurred while writing to the tickets.csv file: " + e.getMessage());          
+          }
    }
-   
-   
+
 }
