@@ -2,7 +2,13 @@ package Menus;
 import Functions.*;
 
 public class App {
-    public void Run() {
+   private static FileHandling fileHandling;
+   
+   public static void setFileHandling(FileHandling fh) {
+         App.fileHandling = fh;
+   }
+   
+   public void Run() {
         LogIn login = new LogIn(); // MENU 0 : LogIn
         Register register = new Register(); // MENU 1 : Register
         ForgotPass forgotPass = new ForgotPass(); // MENU 2 : Forgot Pass
@@ -32,6 +38,11 @@ public class App {
 
     public static void ExitProgram() {
         System.out.println("Terminating Program. Please Wait A Moment...");
+        
+        if (fileHandling != null) {
+            fileHandling.userWriter();
+        }
+        
         InputReader.Close();
         System.exit(0);
     }

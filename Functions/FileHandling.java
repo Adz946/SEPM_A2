@@ -4,10 +4,17 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.List;
 // ---------------------------------------------------------------------------------------------------- //
 public class FileHandling {
     // ---------------------------------------------------------------------------------------------------- //
-    public void SetUp() {
+    private String basePath = "./Data/";
+    
+    public void SetUp(String filePath) {
+       
+       basePath = filePath;
         try {
             UserReader();
             TicketReader();
@@ -16,7 +23,7 @@ public class FileHandling {
     }
 
     private void UserReader() throws Exception {
-        String normalizedPath = Paths.get("./Data/users.csv").normalize().toString();
+        String normalizedPath = Paths.get(basePath + "users.csv").normalize().toString();
         File file = new File(normalizedPath);
 
         if (file.exists()) { 
@@ -31,36 +38,23 @@ public class FileHandling {
                     staff = new Technician(user[0], user[1], user[2], user[3], Integer.parseInt(user[4]));
                     Data.Get().AddTechy((Technician)staff);
                 }
-                else { staff = new Staff(user[0], user[1], user[2], user[3]); }
-
-                Data.Get().AddStaff(staff);       
+                else { 
+                    staff = new Staff(user[0], user[1], user[2], user[3]);             
+                    Data.Get().AddStaff(staff);    
+                }
+                
             }
 
             reader.close();
         } 
         else {
-            // Techies Hard-coded
-            Data.Get().AddTechy(new Technician("Harry Styles", "h.styles@company.com", "0411 222 333", "01234_xX_StyleS_Xx_56789", 1));
-            Data.Get().AddTechy(new Technician("Niall Horan", "n.horan@company.com", "0422 333 444", "0_Xx_xX__HORAN__Xx_xX_0", 1));
-            Data.Get().AddTechy(new Technician("Liam Payne", "l.payne@company.com", "0433 444 555", "XxXx_xXxX__PaYnE__XxXx_xXxX", 1));
-            Data.Get().AddTechy(new Technician("Louis Tomlinson", "l.tomlinson@company.com", "0444 555 666", "21!_Jumbo_Junior_!12", 2));
-            Data.Get().AddTechy(new Technician("Zayn Malik", "z.malik@company.com", "0455 666 777", "_Malik-Al-Igbeer_45?", 2));
-
-            // Staff Hard-coded
-            Data.Get().AddStaff(new Staff("Harry Styles", "h.styles@company.com", "0411 222 333", "01234_xX_StyleS_Xx_56789"));
-            Data.Get().AddStaff(new Staff("Niall Horan", "n.horan@company.com", "0422 333 444", "0_Xx_xX__HORAN__Xx_xX_0"));
-            Data.Get().AddStaff(new Staff("Liam Payne", "l.payne@company.com", "0433 444 555", "XxXx_xXxX__PaYnE__XxXx_xXxX"));
-            Data.Get().AddStaff(new Staff("Louis Tomlinson", "l.tomlinson@company.com", "0444 555 666", "21!_Jumbo_Junior_!12"));
-            Data.Get().AddStaff(new Staff("Zayn Malik", "z.malik@company.com", "0455 666 777", "_Malik-Al-Igbeer_45?"));
-            Data.Get().AddStaff(new Staff("Sam Syne", "s.syne@company.com", "0466 777 888", "01234ABCDE56789fghij"));
-            Data.Get().AddStaff(new Staff("Juliet Jameson", "j.jameson@company.com", "0477 888 999", "abcde01234FGHIJ56789"));
-            Data.Get().AddStaff(new Staff("Jacob Heru", "j.heru@company.com", "0488 999 000", "SecretPassword_No0neCanGuess_THIS"));
+            System.out.println("File does not exist: " + file);    
         }
     }
 
     private void TicketReader() throws Exception {
         Pattern LINE_PATTERN = Pattern.compile(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-        String normalizedPath = Paths.get("./Data/tickets.csv").normalize().toString();
+        String normalizedPath = Paths.get(basePath + "tickets.csv").normalize().toString();
         File file = new File(normalizedPath);
 
         if (file.exists()) {
@@ -75,22 +69,7 @@ public class FileHandling {
             reader.close();
         }
         else {
-            // Tickets Hard-coded
-            Data.Get().AddTicket(new Ticket("T-100", "s.syne@company.com", "h.styles@company.com", 
-            "\"Hey, I'm trying to use the new Editing Software but am running into some issues with the updated features, how do I use those?\"", 
-            "LOW", "OPEN"));
-
-            Data.Get().AddTicket(new Ticket("T-105", "s.syne@company.com", "z.malik@company.com", 
-            "\"I've lost access to the 'Project T' Team's shared resources. I need to get major changes done by tonight!\"", 
-            "HIGH", "ARCHIVED"));
-
-            Data.Get().AddTicket(new Ticket("T-110", "j.jameson@company.com", "l.payne@company.com", 
-            "\"The Cloud is slow today, took me 15 minutes to load my dashboard.\"", 
-            "MEDIUM", "RESOLVED"));
-
-            Data.Get().AddTicket(new Ticket("T-115", "j.jameson@company.com", "l.tomlinson@company.com", 
-            "\"I've lost it! All my data!! I need a back-up recovery of 'Project L' Version 13.42!\"", 
-            "HIGH", "OPEN"));
+            System.out.println("File does not exist: " + file);
         }
     }
     // ---------------------------------------------------------------------------------------------------- //
@@ -107,4 +86,45 @@ public class FileHandling {
         else { System.out.println(".../Changes have been made!"); }
     }
     // ---------------------------------------------------------------------------------------------------- //
+    
+    public void userWriter() {
+       Data data = Data.Get();
+       Collection<Staff> allStaff = data.GetAllStaff();
+       Collection<Technician> allTechies = data.GetAllTechies();
+
+       try (FileWriter fileWriter = new FileWriter(basePath + "/users.csv", false);
+            PrintWriter printWriter = new PrintWriter(fileWriter)) {
+           printWriter.println("Name,Email,Mobile,Password,Level");
+           
+           // Write Staff members
+           for (Staff staff : allStaff) {
+               String line = String.format("%s,%s,%s,%s", 
+                       staff.GetName(),
+                       staff.GetEmail(),
+                       staff.GetMobile(),
+                       staff.GetPassword());
+               printWriter.println(line);
+           }
+
+           // Write Technicians
+           for (Technician tech : allTechies) {
+               String line = String.format("%s,%s,%s,%s,%d", 
+                       tech.GetName(),
+                       tech.GetEmail(),
+                       tech.GetMobile(),
+                       tech.GetPassword(),
+                       tech.TechLevel());
+               printWriter.println(line);
+           }
+
+       } catch (IOException e) {
+           System.out.println("An error occurred while writing to the users.csv file: " + e.getMessage());
+       }
+   }
+    
+   public void ticketWriter() {
+      //TODO:write to ticket.csv in filehandler path. 
+   }
+   
+   
 }
