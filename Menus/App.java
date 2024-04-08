@@ -8,6 +8,7 @@ public class App {
         ForgotPass forgotPass = new ForgotPass(); // MENU 2 : Forgot Pass
         Home home = new Home(); // MENU 3 : Home
         TicketView view = new TicketView(); // MENU 4 : View Tickets
+        TicketOpen open = new TicketOpen(); // MENU 5 : Open Ticket
         // MENU 5 : Create Tickets
         int menuNum = 0;
 
@@ -17,6 +18,7 @@ public class App {
             else if (menuNum == 2) { menuNum = forgotPass.Menu(); }
             else if (menuNum == 3) { menuNum = home.Menu(); }
             else if (menuNum == 4) { menuNum = view.Menu(); }
+            else if (menuNum == 5) { menuNum = open.Menu(); }
             else if (menuNum == 6) { ExitProgram(); }
             else { menuNum = 0; }
 
