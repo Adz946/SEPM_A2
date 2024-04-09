@@ -1,6 +1,6 @@
-ID,SMail,TMail,Description,Severity,Status
-T-120,j.jameson@company.com,n.horan@company.com,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis",MEDIUM,RESOLVED
-T-110,j.jameson@company.com,l.payne@company.com,"The Cloud is slow today, took me 15 minutes to load my dashboard.",MEDIUM,OPEN
-T-115,j.jameson@company.com,l.tomlinson@company.com,"I've lost it! All my data!! I need a back-up recovery of 'Project L' Version 13.42!",HIGH,OPEN
-T-105,s.syne@company.com,z.malik@company.com,"I've lost access to the 'Project T' Team's shared resources. I need to get major changes done by tonight!",HIGH,ARCHIVED
-T-100,s.syne@company.com,h.styles@company.com,"Hey, I'm trying to use the new Editing Software but am running into some issues with the updated features, how do I use those?",LOW,OPEN
+ID,SMail,TMail,Description,Severity,Status,DateTime
+T-120,j.jameson@company.com,n.horan@company.com,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis",MEDIUM,RESOLVED,08/04/2024 11:52 PM
+T-110,j.jameson@company.com,l.payne@company.com,"The Cloud is slow today, took me 15 minutes to load my dashboard.",MEDIUM,OPEN,09/04/2024 02:12 PM
+T-115,j.jameson@company.com,l.tomlinson@company.com,"I've lost it! All my data!! I need a back-up recovery of 'Project L' Version 13.42!",HIGH,OPEN,10/04/2024 08:14 AM
+T-105,s.syne@company.com,z.malik@company.com,"I've lost access to the 'Project T' Team's shared resources. I need to get major changes done by tonight!",HIGH,ARCHIVED,09/04/2024 10:53 AM
+T-100,s.syne@company.com,h.styles@company.com,"Hey, I'm trying to use the new Editing Software but am running into some issues with the updated features, how do I use those?",LOW,OPEN,10/04/2024 03:47 PM

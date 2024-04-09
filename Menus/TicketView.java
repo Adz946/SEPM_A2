@@ -13,7 +13,7 @@ public class TicketView {
 
         ArrayList<Ticket> tickets = Data.Get().GetStaffTickets();
         if (tickets.size() > 0) { 
-            System.out.printf("| %-5s | %-50s | %-50s | %-15s | %-15s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status");
+            System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status", "Date / Time");
             for (Ticket ticket : tickets) { ticket.View(); ticketIDs.add(ticket.GetID()); }
             System.out.println();
 

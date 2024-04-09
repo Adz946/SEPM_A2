@@ -60,7 +60,7 @@ public class FileHandling {
 
             while (reader.hasNextLine()) {
                 String[] ticket = LINE_PATTERN.split(reader.nextLine(), -1);
-                Data.Get().AddTicket(new Ticket(ticket[0].trim(), ticket[1].trim(), ticket[2].trim(), ticket[3].trim(), ticket[4].trim(), ticket[5].trim()));
+                Data.Get().AddTicket(new Ticket(ticket[0].trim(), ticket[1].trim(), ticket[2].trim(), ticket[3].trim(), ticket[4].trim(), ticket[5].trim(), ticket[6].trim()));
             }
 
             reader.close();

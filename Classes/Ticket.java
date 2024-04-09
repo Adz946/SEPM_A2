@@ -1,4 +1,6 @@
 package Classes;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 // ---------------------------------------------------------------------------------------------------- //
 public class Ticket {
     enum Severity { LOW, MEDIUM, HIGH }
@@ -12,22 +14,26 @@ public class Ticket {
     private Status status;    
     private Severity severity;     
     // sMail == Staff Email | tMail == Technician Email
+
+    private final LocalDateTime dateTime;
     // ---------------------------------------------------------------------------------------------------- //
     public Ticket(String ID, String sMail, String tMail, String description, String sev) {
         this.ID = ID;
         this.sMail = sMail;
         this.tMail = tMail;
         this.description = description;
+        this.dateTime = LocalDateTime.now();
         
         SetSeverity(sev);  
         this.status = Status.OPEN;
     }
 
-    public Ticket(String ID, String sMail, String tMail,String description, String sev, String stat) {
+    public Ticket(String ID, String sMail, String tMail,String description, String sev, String stat, String dateTime) {
         this.ID = ID;
         this.sMail = sMail;
         this.tMail = tMail;
         this.description = description;
+        this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
 
         SetStatus(stat);
         SetSeverity(sev);  
@@ -56,6 +62,11 @@ public class Ticket {
             default: return null;
         }
     }
+
+    public String GetDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
+        return formatter.format(this.dateTime);
+    }
     // ---------------------------------------------------------------------------------------------------- //
     public void SetTechy(String tMail) { this.tMail = tMail; }
 
@@ -77,13 +88,13 @@ public class Ticket {
     }
     // ---------------------------------------------------------------------------------------------------- //
     public void View() {
-        System.out.printf("| %-5s | %-50s | %-50s | %-15s | %-15s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus());
-        System.out.printf("| %-147s | %n", this.GetDesc());
+        System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetDateTime());
+        System.out.printf("| %-150s | %n", this.GetDesc());
     }
 
     @Override
     public String toString() {
-        return this.GetID() + "," + this.GetStaff() + "," + this.GetTechy() + "," + this.GetDesc() + "," + this.GetSeverity() + "," + this.GetStatus();
+        return this.GetID() + "," + this.GetStaff() + "," + this.GetTechy() + "," + this.GetDesc() + "," + this.GetSeverity() + "," + this.GetStatus() + "," + this.GetDateTime();
     }
     // ---------------------------------------------------------------------------------------------------- //
 }
