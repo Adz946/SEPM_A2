@@ -3,21 +3,17 @@ import Functions.*;
 
 public class App {
    private static FileHandling fileHandling;
-   
-   public static void setFileHandling(FileHandling fh) {
-         App.fileHandling = fh;
-   }
+   public App(FileHandling fh) { fileHandling = fh; }
    
    public void Run() {
-        LogIn login = new LogIn(); // MENU 0 : LogIn
-        Register register = new Register(); // MENU 1 : Register
-        ForgotPass forgotPass = new ForgotPass(); // MENU 2 : Forgot Pass
-        Home home = new Home(); // MENU 3 : Home
-        TicketView view = new TicketView(); // MENU 4 : View Tickets
-        TicketOpen open = new TicketOpen(); // MENU 5 : Open Ticket
-        // MENU 5 : Create Tickets
-        int menuNum = 0;
+        LogIn login = new LogIn();                  // MENU 0 : LogIn
+        Register register = new Register();         // MENU 1 : Register
+        ForgotPass forgotPass = new ForgotPass();   // MENU 2 : Forgot Pass
+        Home home = new Home();                     // MENU 3 : Home
+        TicketView view = new TicketView();         // MENU 4 : View Tickets
+        TicketOpen open = new TicketOpen();         // MENU 5 : Open Ticket
 
+        int menuNum = 0;
         while (true) {
             if (menuNum == 0) {  menuNum = login.Menu(); }
             else if (menuNum == 1) { menuNum = register.Menu(); }
@@ -39,12 +35,8 @@ public class App {
     }
 
     public static void ExitProgram() {
-        System.out.println("Terminating Program. Please Wait A Moment...");
-        
-        if (fileHandling != null) {
-            fileHandling.userWriter();
-            fileHandling.ticketWriter();
-        }
+        System.out.println("Terminating Program. Please Wait A Moment...");     
+        if (fileHandling != null) { fileHandling.SetUpExit(); }
         
         InputReader.Close();
         System.exit(0);

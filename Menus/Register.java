@@ -38,18 +38,20 @@ public class Register {
 
     private int ValidateRegister() {
         if (name != "" && email != "" && mobile != "" && password != "") {
-            Staff newStaff = new Staff(name, email, mobile, password);
-            Data.Get().AddStaff(newStaff);
-            System.out.println(newStaff.toString());
-
-            try { FileHandling.NewStaff(newStaff); }
-            catch (Exception e) { App.WriteError(e.getMessage()); }
-
-            Reset();
-            return 3;
+            try { 
+                Staff newStaff = new Staff(name, email, mobile, password);
+                Data.Get().AddStaff(newStaff);
+                Data.Get().SetActiveStaff(newStaff);
+                
+                Reset();
+                return 3;
+            }
+            catch (Exception e) { 
+                App.WriteError("Error: " + e.getMessage()); 
+                return 1;
+            }   
         }
         else App.WriteError("Enter ALL Fields");
-
         return 1;
     }
     // ---------------------------------------------------------------------------------------------------- //
