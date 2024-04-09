@@ -77,7 +77,8 @@ public class Ticket {
     }
     // ---------------------------------------------------------------------------------------------------- //
     public void View() {
-        System.out.printf("%-5s | %-30s | %-30s | %-10s | %-10s | %-125s %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetDesc());
+        System.out.printf("| %-10s | %-35s | %-35s | %-15s | %-15s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus());
+        System.out.printf("| %-122s | %n", this.GetDesc());
     }
 
     @Override
