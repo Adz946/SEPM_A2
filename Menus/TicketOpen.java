@@ -18,7 +18,7 @@ public class TicketOpen {
         } else {
             System.out.println("No OPEN Tickets Found");
         }
-
+ 
         while (!valid) {
             System.out.println("\nWould you like to change the status of a ticket? Enter Y or N: \n");
             System.out.print(" >> ");
