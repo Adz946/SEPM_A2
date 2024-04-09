@@ -2,7 +2,7 @@ package Classes;
 // ---------------------------------------------------------------------------------------------------- //
 public class Ticket {
     enum Severity { LOW, MEDIUM, HIGH }
-    enum Status { OPEN, CLOSED, RESOLVED, UNRESOLVED, ARCHIVED }
+    enum Status { OPEN, RESOLVED, UNRESOLVED, ARCHIVED }
     // ---------------------------------------------------------------------------------------------------- //
     private final String ID;
     private final String sMail;
@@ -50,7 +50,6 @@ public class Ticket {
     public String GetStatus() {
         switch (this.status) {
             case OPEN: return "OPEN";
-            case CLOSED: return "CLOSED";
             case ARCHIVED: return "ARCHIVED";
             case RESOLVED: return "RESOLVED";
             case UNRESOLVED: return "UNRESOLVED";
@@ -71,7 +70,6 @@ public class Ticket {
     public void SetStatus(String stat) {
         switch (stat) {
             case "OPEN": this.status = Status.OPEN; break;
-            case "CLOSED": this.status = Status.CLOSED; break;
             case "ARCHIVED": this.status = Status.ARCHIVED; break;
             case "RESOLVED": this.status = Status.RESOLVED; break;
             case "UNRESOLVED": this.status = Status.UNRESOLVED; break;

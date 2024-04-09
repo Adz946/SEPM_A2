@@ -31,11 +31,9 @@ public class TicketOpen {
                         String currentStatus = ticket.GetStatus();
                         System.out.printf("The current status of ticket: "+ ticketID + " is " + currentStatus + " Enter the new status: \n" +
                                 "---------- %s ---------- \n" +
-                                "[1] OPEN \n" +
-                                "[2] CLOSED  \n" +
-                                "[3] RESOLVED \n" +
-                                "[4] UNRESOLVED \n" +
-                                "[5] Exit \n", currentStatus);
+                                "[1] RESOLVED \n" +
+                                "[2] UNRESOLVED  \n" +
+                                "[3] Exit \n", currentStatus);
                         System.out.print(" >> ");
 
                         String input = InputReader.Get().nextLine();
@@ -43,22 +41,18 @@ public class TicketOpen {
                         while (newStatus.equals("")) {
                             
                             if (input.equals("1")) { 
-                                newStatus = "OPEN"; 
-                            } else if (input.equals("2")) { 
-                                newStatus = "CLOSED"; 
-                            } else if (input.equals("3")) { 
                                 newStatus = "RESOLVED"; 
-                            } else if (input.equals("4")) { 
+                            } else if (input.equals("2")) { 
                                 newStatus = "UNRESOLVED"; 
-                            } 
-
+                            } else if (input.equals("3")) {
+                                return 3;
+                            }
                             if (currentStatus.equals(newStatus)) { 
                                 System.out.println("The new ticket status must be different than the old status.");
                             } else {
                                 ticket.SetStatus(newStatus);
                                 System.out.println("Status of ticket " + ticketID + " was " + currentStatus + ", now it has been changed to " + newStatus +".");
                                 valid = true;
-
                             }
                         }
                     }
