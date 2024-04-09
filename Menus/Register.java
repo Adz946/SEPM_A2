@@ -15,13 +15,13 @@ public class Register {
     }
     // ---------------------------------------------------------------------------------------------------- //
     public int Menu() {
-        System.out.printf("---------- Register ---------- \n" +
-            "[1] Name : %s \n" +
-            "[2] Email : %s \n" +
-            "[3] Mobile : %s \n" +
-            "[4] Password : %s \n" +
-            "[5] Register \n" +
-            "[6] Go Back \n", name, email, mobile, password);
+        System.out.printf("---------- Register ---------- %n" +
+            "[1] Name : %s %n" +
+            "[2] Email : %s %n" +
+            "[3] Mobile : %s %n" +
+            "[4] Password : %s %n" +
+            "[5] Register %n" +
+            "[6] Go Back %n", name, email, mobile, password);
         System.out.print(" >> ");
         String input = InputReader.Get().nextLine();
 
@@ -38,18 +38,20 @@ public class Register {
 
     private int ValidateRegister() {
         if (name != "" && email != "" && mobile != "" && password != "") {
-            Staff newStaff = new Staff(name, email, mobile, password);
-            Data.Get().AddStaff(newStaff);
-            System.out.println(newStaff.toString());
-
-            try { FileHandling.NewStaff(newStaff); }
-            catch (Exception e) { App.WriteError(e.getMessage()); }
-
-            Reset();
-            return 3;
+            try { 
+                Staff newStaff = new Staff(name, email, mobile, password);
+                Data.Get().AddStaff(newStaff);
+                Data.Get().SetActiveStaff(newStaff);
+                
+                Reset();
+                return 3;
+            }
+            catch (Exception e) { 
+                App.WriteError("Error: " + e.getMessage()); 
+                return 1;
+            }   
         }
         else App.WriteError("Enter ALL Fields");
-
         return 1;
     }
     // ---------------------------------------------------------------------------------------------------- //

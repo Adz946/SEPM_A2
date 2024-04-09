@@ -13,8 +13,8 @@ public class Ticket {
     private Severity severity;     
     // sMail == Staff Email | tMail == Technician Email
     // ---------------------------------------------------------------------------------------------------- //
-    public Ticket(int ID, String sMail, String tMail, String description, String sev) {
-        this.ID = "T-" + ID;
+    public Ticket(String ID, String sMail, String tMail, String description, String sev) {
+        this.ID = ID;
         this.sMail = sMail;
         this.tMail = tMail;
         this.description = description;
@@ -77,7 +77,8 @@ public class Ticket {
     }
     // ---------------------------------------------------------------------------------------------------- //
     public void View() {
-        System.out.printf("%-5s | %-30s | %-30s | %-10s | %-10s | %-125s %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetDesc());
+        System.out.printf("| %-5s | %-50s | %-50s | %-15s | %-15s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus());
+        System.out.printf("| %-147s | %n", this.GetDesc());
     }
 
     @Override

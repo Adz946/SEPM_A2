@@ -24,6 +24,11 @@ public class InputReader {
         return matcher.matches();
     }
 
+    public static synchronized boolean IDValidation(String input) {
+        String regex = "T-[0-9]{3}";
+        return Validation(input, regex);
+    }
+
     public static synchronized boolean NameValidation(String input) {
         String regex = "^[A-Z][a-z]{1,29}( [A-Z][a-z]{1,29}){0,2}$";
         return Validation(input, regex);
