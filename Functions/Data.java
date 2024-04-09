@@ -7,7 +7,10 @@ import java.util.Collection;
 public class Data {
     // ---------------------------------------------------------------------------------------------------- //
     private static Data INSTANCE;
+    private static int ticketID;
+
     private Data() {
+        ticketID = 0;
         Staff = new HashMap<>();
         Techies = new HashMap<>();
         Tickets = new HashMap<>();
@@ -37,8 +40,17 @@ public class Data {
     public Collection<Technician> GetAllTechies() { return Techies.values(); }
     // ---------------------------------------------------------------------------------------------------- //
     private static HashMap<String, Ticket> Tickets;
-    public void AddTicket(Ticket t) { Tickets.put(t.GetID(), t); }
-    public void RemoveTicket(String ID) { Tickets.remove(ID); }
+    public int GetNewTicketID() { 
+        ticketID += 5;
+        return ticketID;
+    }
+
+    public void AddTicket(Ticket t) { 
+        Tickets.put(t.GetID(), t); 
+
+        int id = Integer.parseInt(t.GetID().split("-")[1]);
+        if (id > ticketID) { ticketID = id; }
+    }
 
     public Ticket GetTicket(String ID) { return Tickets.get(ID); }
     public Collection<Ticket> GetAllTickets() { return Tickets.values(); }

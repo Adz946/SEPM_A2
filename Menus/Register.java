@@ -15,13 +15,13 @@ public class Register {
     }
     // ---------------------------------------------------------------------------------------------------- //
     public int Menu() {
-        System.out.printf("---------- Register ---------- \n" +
-            "[1] Name : %s \n" +
-            "[2] Email : %s \n" +
-            "[3] Mobile : %s \n" +
-            "[4] Password : %s \n" +
-            "[5] Register \n" +
-            "[6] Go Back \n", name, email, mobile, password);
+        System.out.printf("---------- Register ---------- %n" +
+            "[1] Name : %s %n" +
+            "[2] Email : %s %n" +
+            "[3] Mobile : %s %n" +
+            "[4] Password : %s %n" +
+            "[5] Register %n" +
+            "[6] Go Back %n", name, email, mobile, password);
         System.out.print(" >> ");
         String input = InputReader.Get().nextLine();
 
