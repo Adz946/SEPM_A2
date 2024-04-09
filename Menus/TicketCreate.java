@@ -39,6 +39,8 @@ public class TicketCreate {
 
         Data.Get().AddTicket(new Ticket(id, sMail, tMail, description, severity));
         System.out.println("Ticket Added Successfully");
+
+        Reset();
     }
 
     private String SeveritySelect() {

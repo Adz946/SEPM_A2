@@ -1,6 +1,6 @@
 package Menus;
+import Classes.*;
 import Functions.*;
-import Classes.Ticket;
 import java.util.ArrayList;
 
 public class TicketView {
@@ -8,6 +8,8 @@ public class TicketView {
     // ---------------------------------------------------------------------------------------------------- //
     public int Menu() {
         ticketIDs = new ArrayList<>();
+        boolean techy = false;
+        if (Data.Get().GetActiveStaff() instanceof Technician) { techy = true; }
 
         ArrayList<Ticket> tickets = Data.Get().GetStaffTickets();
         if (tickets.size() > 0) { 
@@ -15,13 +17,21 @@ public class TicketView {
             for (Ticket ticket : tickets) { ticket.View(); ticketIDs.add(ticket.GetID()); }
             System.out.println();
 
-            System.out.println("[1] Cancel Ticket \n[2] Create Ticket \n[3] Go Back");
+            if (techy) { System.out.println("[1] Modify Ticket"); }
+            else { System.out.println("[1] Cancel Ticket"); }
+            System.out.println("[2] Create Ticket \n[3] Go Back");
             System.out.print(" >> ");
             String input = InputReader.Get().nextLine();
 
             if (input.equals("1")) { 
-                Ticket ticket = Data.Get().GetTicket(CancelTicket());
-                if (ticket != null) { ticket.SetStatus("UNRESOLVED"); }
+                Ticket ticket = Data.Get().GetTicket(TicketSelect());
+                if (ticket != null) { 
+                    if (techy) {
+                        TicketModify modify = new TicketModify(ticket);
+                        modify.Menu();
+                    }
+                    else ticket.SetStatus("UNRESOLVED"); 
+                }
              }
             else if (input.equals("2")) { return 5; }
             else if (input.equals("3")) { return 3; }
@@ -31,7 +41,7 @@ public class TicketView {
         return 3;
     }
     // ---------------------------------------------------------------------------------------------------- //
-    private String CancelTicket() {
+    private String TicketSelect() {
         while (true) {
             System.out.print("Ticket ID: ");
             String input = InputReader.Get().nextLine();
