@@ -40,6 +40,9 @@ public class Data {
     public Collection<Technician> GetAllTechies() { return Techies.values(); }
     // ---------------------------------------------------------------------------------------------------- //
     private static HashMap<String, Ticket> Tickets;
+    public Ticket GetTicket(String ID) { return Tickets.get(ID); }
+    public Collection<Ticket> GetAllTickets() { return Tickets.values(); }
+
     public int GetNewTicketID() { 
         ticketID += 5;
         return ticketID;
@@ -52,9 +55,6 @@ public class Data {
         if (id > ticketID) { ticketID = id; }
     }
 
-    public Ticket GetTicket(String ID) { return Tickets.get(ID); }
-    public Collection<Ticket> GetAllTickets() { return Tickets.values(); }
-
     public ArrayList<Ticket> GetStaffTickets() {
         ArrayList<Ticket> ReturnTickets = new ArrayList<>();
 
@@ -66,6 +66,7 @@ public class Data {
             else if (ticket.GetStaff().equals(ActiveStaff.GetEmail()) && ticket.GetStatus().equals("OPEN")) { ReturnTickets.add(ticket); }
         }
 
+        ReturnTickets.sort((t1, t2) -> t2.GetDateTime().compareTo(t1.GetDateTime()));
         return ReturnTickets;
     }
     // ---------------------------------------------------------------------------------------------------- //

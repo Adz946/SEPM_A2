@@ -30,14 +30,14 @@ public class TicketView {
                         TicketModify modify = new TicketModify(ticket);
                         modify.Menu();
                     }
-                    else ticket.SetStatus("UNRESOLVED"); 
+                    else ticket.SetStatus("CANCELLED"); 
                 }
              }
             else if (input.equals("2")) { return 5; }
             else if (input.equals("3")) { return 3; }
             else { App.WriteError("Only Select Between the Available Options"); }
         }
-        else System.out.println("No OPEN Tickets Found");       
+        else App.WriteError("No OPEN Tickets Found");      
         return 3;
     }
     // ---------------------------------------------------------------------------------------------------- //

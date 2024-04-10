@@ -1,5 +1,8 @@
 package Menus;
 import Functions.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class App {
    private static FileHandling fileHandling;
@@ -27,6 +30,12 @@ public class App {
             for (int i = 0; i < 75; i++) { System.out.print("-"); }
             System.out.println();
         }
+    }
+
+    public static boolean DateCheck(String dateTime, int length) {
+        LocalDateTime now = LocalDateTime.now(), dt = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+        long hoursBetween = Duration.between(dt, now).toHours();
+        return hoursBetween > length;
     }
 
     public static void WriteError(String msg) {
