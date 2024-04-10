@@ -1,7 +1,7 @@
 package Functions;
 import Menus.App;
-
 import Classes.*;
+
 import java.io.*;
 import java.util.Scanner;
 import java.nio.file.Paths;
@@ -60,7 +60,10 @@ public class FileHandling {
 
             while (reader.hasNextLine()) {
                 String[] ticket = LINE_PATTERN.split(reader.nextLine(), -1);
-                Data.Get().AddTicket(new Ticket(ticket[0].trim(), ticket[1].trim(), ticket[2].trim(), ticket[3].trim(), ticket[4].trim(), ticket[5].trim()));
+                String status = ticket[5].trim();
+
+                if (App.DateCheck(ticket[6].trim(), 24)) { status = "ARCHIVED"; }
+                Data.Get().AddTicket(new Ticket(ticket[0].trim(), ticket[1].trim(), ticket[2].trim(), ticket[3].trim(), ticket[4].trim(), status, ticket[6].trim()));
             }
 
             reader.close();

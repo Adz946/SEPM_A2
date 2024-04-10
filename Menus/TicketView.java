@@ -13,7 +13,7 @@ public class TicketView {
 
         ArrayList<Ticket> tickets = Data.Get().GetStaffTickets();
         if (tickets.size() > 0) { 
-            System.out.printf("| %-5s | %-50s | %-50s | %-15s | %-15s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status");
+            System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status", "Date / Time");
             for (Ticket ticket : tickets) { ticket.View(); ticketIDs.add(ticket.GetID()); }
             System.out.println();
 
@@ -30,14 +30,14 @@ public class TicketView {
                         TicketModify modify = new TicketModify(ticket);
                         modify.Menu();
                     }
-                    else ticket.SetStatus("UNRESOLVED"); 
+                    else ticket.SetStatus("CANCELLED"); 
                 }
              }
             else if (input.equals("2")) { return 5; }
             else if (input.equals("3")) { return 3; }
             else { App.WriteError("Only Select Between the Available Options"); }
         }
-        else System.out.println("No OPEN Tickets Found");       
+        else App.WriteError("No OPEN Tickets Found");      
         return 3;
     }
     // ---------------------------------------------------------------------------------------------------- //

@@ -31,16 +31,19 @@ public class TicketCreate {
     }
     // ---------------------------------------------------------------------------------------------------- //
     private void CreateTicket() {
-        String id = "T-" + Data.Get().GetNewTicketID();
-        String sMail = Data.Get().GetActiveStaff().GetEmail();
+        if (description != "" && severity != "") {
+            String id = "T-" + Data.Get().GetNewTicketID();
+            String sMail = Data.Get().GetActiveStaff().GetEmail();
 
-        String tMail = "n.horan@company.com";
-        if (severity.equals("HIGH")) { tMail = "z.malik@company.com"; }
+            String tMail = "n.horan@company.com";
+            if (severity.equals("HIGH")) { tMail = "z.malik@company.com"; }
 
-        Data.Get().AddTicket(new Ticket(id, sMail, tMail, description, severity));
-        System.out.println("Ticket Added Successfully");
+            Data.Get().AddTicket(new Ticket(id, sMail, tMail, description, severity));
+            System.out.println("Ticket Added Successfully");
 
-        Reset();
+            Reset();
+        }
+        else App.WriteError("Fill ALL Fields");
     }
 
     private String SeveritySelect() {
