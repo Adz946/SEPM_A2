@@ -24,7 +24,7 @@ public class TicketCreate {
         if (input.equals("1")) { severity = SeveritySelect(); }
         else if (input.equals("2")) { description = DescriptionInput(); }
         else if (input.equals("3")) { CreateTicket(); return 3; }
-        else if (input.equals("4")) { return 3; }
+        else if (input.equals("4")) { Reset(); return 3; }
         else { App.WriteError("Only Select Between the Available Options"); }
 
         return 5;
@@ -39,6 +39,8 @@ public class TicketCreate {
 
         Data.Get().AddTicket(new Ticket(id, sMail, tMail, description, severity));
         System.out.println("Ticket Added Successfully");
+
+        Reset();
     }
 
     private String SeveritySelect() {
