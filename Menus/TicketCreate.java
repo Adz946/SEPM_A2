@@ -78,7 +78,7 @@ public class TicketCreate {
         }
     }
     
-    private String assignTicketToTechnician(String severity) {
+    public static String assignTicketToTechnician(String severity) {
         int severityLevel = severity.equals("HIGH") ? 2 : 1;
 
         List<Technician> filteredTechies = Data.Get().GetAllTechies().stream()
@@ -86,7 +86,7 @@ public class TicketCreate {
             .collect(Collectors.toList());
 
         if (filteredTechies.isEmpty()) {
-            return "z.malik@company.com"; // Default technician if none returned. 
+            return severityLevel == 1 ? "n.horan@company.com" : "z.malik@company.com"; 
         }
 
         Map<Technician, Integer> techiesWithTicketCounts = new HashMap<>();
