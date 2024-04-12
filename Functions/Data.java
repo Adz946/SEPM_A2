@@ -69,5 +69,18 @@ public class Data {
         ReturnTickets.sort((t1, t2) -> t2.GetDateTime().compareTo(t1.GetDateTime()));
         return ReturnTickets;
     }
+    
+    public ArrayList<Ticket> GetTechOpenTickets(String techEmail) {
+        ArrayList<Ticket> returnTickets = new ArrayList<>();
+
+        for (Ticket ticket : Tickets.values()) {
+            if (ticket.GetTechy().equals(techEmail) && ticket.GetStatus().equals("OPEN")) {
+                returnTickets.add(ticket);
+            }
+        }
+
+        returnTickets.sort((t1, t2) -> t2.GetDateTime().compareTo(t1.GetDateTime())); 
+        return returnTickets;
+    }
     // ---------------------------------------------------------------------------------------------------- //
 }
