@@ -20,7 +20,10 @@ public class FileHandling {
             UserReader();
             TicketReader();
         }
-        catch (Exception e) { System.out.println("Error: " + e); }
+        catch (Exception e) { 
+            System.out.println("Error: " + e.getMessage()); 
+            for (StackTraceElement element : e.getStackTrace()) { System.out.println(element); }
+        }
     }
 
     private void UserReader() throws Exception {
@@ -62,7 +65,9 @@ public class FileHandling {
                 String[] ticket = LINE_PATTERN.split(reader.nextLine(), -1);
                 String status = ticket[5].trim();
 
-                if (App.DateCheck(ticket[6].trim(), 24)) { status = "ARCHIVED"; }
+                if (status == "RESOLVED" || status == "UNRESOLVED") {
+                    if (App.DateCheck(ticket[6].trim(), 24)) { status = "ARCHIVED"; }
+                }
                 Data.Get().AddTicket(new Ticket(ticket[0].trim(), ticket[1].trim(), ticket[2].trim(), ticket[3].trim(), ticket[4].trim(), status, ticket[6].trim()));
             }
 
