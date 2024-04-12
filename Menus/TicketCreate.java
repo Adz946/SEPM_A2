@@ -1,7 +1,16 @@
 package Menus;
 import Classes.Ticket;
+import Classes.Technician;
 import Functions.Data;
 import Functions.InputReader;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class TicketCreate {
     private static String description, severity;
@@ -34,12 +43,12 @@ public class TicketCreate {
         if (description != "" && severity != "") {
             String id = "T-" + Data.Get().GetNewTicketID();
             String sMail = Data.Get().GetActiveStaff().GetEmail();
-
-            String tMail = "n.horan@company.com";
-            if (severity.equals("HIGH")) { tMail = "z.malik@company.com"; }
+            
+            String tMail = assignTicketToTechnician(severity);
 
             Data.Get().AddTicket(new Ticket(id, sMail, tMail, description, severity));
-            System.out.println("Ticket Added Successfully");
+            System.out.println("Ticket Added Successfully!");
+            System.out.println("Ticket ID: " + id + " - Assigned Technician: " + tMail );
 
             Reset();
         }
@@ -68,4 +77,36 @@ public class TicketCreate {
             else return "\"" + input + "\"";
         }
     }
+    
+    private String assignTicketToTechnician(String severity) {
+        int severityLevel = severity.equals("HIGH") ? 2 : 1;
+
+        List<Technician> filteredTechies = Data.Get().GetAllTechies().stream()
+            .filter(t -> t.TechLevel() == severityLevel)
+            .collect(Collectors.toList());
+
+        if (filteredTechies.isEmpty()) {
+            return "z.malik@company.com"; // Default technician if none returned. 
+        }
+
+        Map<Technician, Integer> techiesWithTicketCounts = new HashMap<>();
+
+        for (Technician tech : filteredTechies) {
+            techiesWithTicketCounts.put(tech, Data.Get().GetTechOpenTickets(tech.GetEmail()).size());
+        }
+
+       int minTickets = Collections.min(techiesWithTicketCounts.values());
+
+       List<Technician> leastLoadedTechies = techiesWithTicketCounts.entrySet().stream()
+           .filter(entry -> entry.getValue() == minTickets)
+           .map(Map.Entry::getKey)
+           .collect(Collectors.toList());
+
+       Random rand = new Random();
+       Technician assignedTech = leastLoadedTechies.get(rand.nextInt(leastLoadedTechies.size()));
+
+       return assignedTech.GetEmail();
+   }
+    // ---------------------------------------------------------------------------------------------------- //
+    
 }
