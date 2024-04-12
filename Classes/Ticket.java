@@ -1,6 +1,7 @@
 package Classes;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 // ---------------------------------------------------------------------------------------------------- //
 public class Ticket {
     enum Severity { LOW, MEDIUM, HIGH }
@@ -33,7 +34,7 @@ public class Ticket {
         this.sMail = sMail;
         this.tMail = tMail;
         this.description = description;
-        this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+        this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US));
 
         SetStatus(stat);
         SetSeverity(sev);  
@@ -65,7 +66,7 @@ public class Ticket {
     }
 
     public String GetDateTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US);
         return formatter.format(this.dateTime);
     }
     // ---------------------------------------------------------------------------------------------------- //

@@ -3,6 +3,7 @@ import Functions.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class App {
    private static FileHandling fileHandling;
@@ -33,7 +34,10 @@ public class App {
     }
 
     public static boolean DateCheck(String dateTime, int length) {
-        LocalDateTime now = LocalDateTime.now(), dt = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+        for (int i = 0; i < dateTime.length(); i++) { System.out.print(i + ": " + dateTime.charAt(i) + " | "); }
+        System.out.println();
+
+        LocalDateTime now = LocalDateTime.now(), dt = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US));
         long hoursBetween = Duration.between(dt, now).toHours();
         return hoursBetween > length;
     }
