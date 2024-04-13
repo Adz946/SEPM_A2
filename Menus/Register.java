@@ -61,7 +61,7 @@ public class Register {
             String input = InputReader.Get().nextLine();
 
             if (InputReader.NameValidation(input)) return input;
-            else App.WriteError("Up to 3 Names: Each Starting with a Capital");
+            else App.WriteError("Please enter your First, Middle (optional) and Last Name, each capitalised with a space between.");
         }
     }
 
