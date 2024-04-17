@@ -12,14 +12,13 @@ public class TicketView {
         if (Data.Get().GetActiveStaff() instanceof Technician) { techy = true; }
 
         ArrayList<Ticket> tickets = Data.Get().GetStaffTickets();
-        if (tickets.size() > 0) { 
-            System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status", "Date / Time");
+        if (!tickets.isEmpty()) { 
+            System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-20s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status", "Opened Date", "Archived Date");
             for (Ticket ticket : tickets) { ticket.View(); ticketIDs.add(ticket.GetID()); }
             System.out.println();
 
-            if (techy) { System.out.println("[1] Modify Ticket"); }
-            else { System.out.println("[1] Cancel Ticket"); }
-            System.out.println("[2] Create Ticket \n[3] Go Back");
+            String option1 = techy ? "[1] Modify Ticket" : "[1] Cancel Ticket";
+            System.out.println(option1 + "\n[2] Create Ticket \n[3] Go Back");
             System.out.print(" >> ");
             String input = InputReader.Get().nextLine();
 

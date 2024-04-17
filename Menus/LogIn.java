@@ -54,6 +54,7 @@ public class LogIn {
             else if (InputReader.PasswordValidation(input)) {
                 if (input.equals(staff.GetPassword())) {
                     Data.Get().SetActiveStaff(staff);
+                    App.WriteSuccess("Log In Successful");
                     return 3;
                 }
                 else App.WriteError("Password is Incorrect");

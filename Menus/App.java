@@ -5,11 +5,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
+// ---------------------------------------------------------------------------------------------------- //
 public class App {
-   private static FileHandling fileHandling;
-   public App(FileHandling fh) { fileHandling = fh; }
-   
-   public void Run() {
+    private static Random random = new Random();
+    private static FileHandling fileHandling;
+    public App(FileHandling fh) { fileHandling = fh; }
+    
+    public void Run() {
         LogIn login = new LogIn();                  // MENU 0 : LogIn
         Register register = new Register();         // MENU 1 : Register
         ForgotPass forgotPass = new ForgotPass();   // MENU 2 : Forgot Pass
@@ -32,20 +40,36 @@ public class App {
             System.out.println();
         }
     }
+    // ---------------------------------------------------------------------------------------------------- //
+    public static String ticketAssignment(String severity) {
+        int severityLevel = severity.equals("HIGH") ? 2 : 1;
+        HashMap<String, Integer> openTickets = Data.Get().GetTechyOpenTickets(severityLevel);
 
-    public static boolean DateCheck(String dateTime, int length) {
-        for (int i = 0; i < dateTime.length(); i++) { System.out.print(i + ": " + dateTime.charAt(i) + " | "); }
-        System.out.println();
-
+        Optional<Integer> minValue = openTickets.values().stream().min(Integer::compare);
+        if (minValue.isPresent()) {
+            List<String> techsWithMinTickets = openTickets.entrySet().stream().filter(entry -> entry.getValue().equals(minValue.get()))
+                .map(Map.Entry::getKey).collect(Collectors.toList());
+            
+            if (techsWithMinTickets.size() == 1) { return techsWithMinTickets.get(0); }
+            else {
+                int randomIndex = random.nextInt(techsWithMinTickets.size());
+                return techsWithMinTickets.get(randomIndex);
+            }
+        }
+        else return null;
+    }
+    // ---------------------------------------------------------------------------------------------------- //
+    public static boolean DateCheck(String dateTime) {
         LocalDateTime now = LocalDateTime.now(), dt = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US));
         long hoursBetween = Duration.between(dt, now).toHours();
-        return hoursBetween > length;
+        return hoursBetween > 24;
     }
 
-    public static void WriteError(String msg) {
-        System.out.println("\033[1;31m [" + msg + "] \033[0m");
-        // RED TEXT: \033[1:31m | RESET: \033[0;0m
-    }
+    public static void WriteError(String msg) { System.out.println("\033[1;31m [" + msg + "] \033[0m"); }
+    // RED TEXT: \033[1:31m | RESET: \033[0;0m
+
+    public static void WriteSuccess(String msg) { System.out.println("\033[1;32m [" + msg + "] \033[0m"); }
+    // GREEN TEXT: \033[1:32m | RESET: \033[0;0m
 
     public static void ExitProgram() {
         System.out.println("Terminating Program. Please Wait A Moment...");     
@@ -54,4 +78,5 @@ public class App {
         InputReader.Close();
         System.exit(0);
     }
+    // ---------------------------------------------------------------------------------------------------- //
 }
