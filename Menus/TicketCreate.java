@@ -1,16 +1,7 @@
 package Menus;
 import Classes.Ticket;
-import Classes.Technician;
 import Functions.Data;
 import Functions.InputReader;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public class TicketCreate {
     private static String description, severity;
@@ -32,27 +23,29 @@ public class TicketCreate {
 
         if (input.equals("1")) { severity = SeveritySelect(); }
         else if (input.equals("2")) { description = DescriptionInput(); }
-        else if (input.equals("3")) { CreateTicket(); return 3; }
+        else if (input.equals("3")) { return CreateTicket(); }
         else if (input.equals("4")) { Reset(); return 3; }
         else { App.WriteError("Only Select Between the Available Options"); }
 
         return 5;
     }
     // ---------------------------------------------------------------------------------------------------- //
-    private void CreateTicket() {
-        if (description != "" && severity != "") {
+    private int CreateTicket() {
+        if (!description.equals("") && !severity.equals("")) {
             String id = "T-" + Data.Get().GetNewTicketID();
-            String sMail = Data.Get().GetActiveStaff().GetEmail();
-            
-            String tMail = assignTicketToTechnician(severity);
+            String sMail = Data.Get().GetActiveStaff().GetEmail();     
+            String tMail = App.ticketAssignment(severity);
 
             Data.Get().AddTicket(new Ticket(id, sMail, tMail, description, severity));
             System.out.println("Ticket Added Successfully!");
-            System.out.println("Ticket ID: " + id + " - Assigned Technician: " + tMail );
+            System.out.println("Ticket ID: " + id + " | Assigned Technician: " + tMail);
 
+            App.WriteSuccess("Ticket Created Successfully");
             Reset();
+            return 3;
         }
         else App.WriteError("Fill ALL Fields");
+        return 5;
     }
 
     private String SeveritySelect() {
@@ -77,36 +70,5 @@ public class TicketCreate {
             else return "\"" + input + "\"";
         }
     }
-    
-    public static String assignTicketToTechnician(String severity) {
-        int severityLevel = severity.equals("HIGH") ? 2 : 1;
-
-        List<Technician> filteredTechies = Data.Get().GetAllTechies().stream()
-            .filter(t -> t.TechLevel() == severityLevel)
-            .collect(Collectors.toList());
-
-        if (filteredTechies.isEmpty()) {
-            return severityLevel == 1 ? "n.horan@company.com" : "z.malik@company.com"; 
-        }
-
-        Map<Technician, Integer> techiesWithTicketCounts = new HashMap<>();
-
-        for (Technician tech : filteredTechies) {
-            techiesWithTicketCounts.put(tech, Data.Get().GetTechOpenTickets(tech.GetEmail()).size());
-        }
-
-       int minTickets = Collections.min(techiesWithTicketCounts.values());
-
-       List<Technician> leastLoadedTechies = techiesWithTicketCounts.entrySet().stream()
-           .filter(entry -> entry.getValue() == minTickets)
-           .map(Map.Entry::getKey)
-           .collect(Collectors.toList());
-
-       Random rand = new Random();
-       Technician assignedTech = leastLoadedTechies.get(rand.nextInt(leastLoadedTechies.size()));
-
-       return assignedTech.GetEmail();
-   }
     // ---------------------------------------------------------------------------------------------------- //
-    
 }

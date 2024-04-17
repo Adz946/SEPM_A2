@@ -26,6 +26,7 @@ public class LogIn {
     
     public Staff EmailInput() {
         while (true) {
+            System.out.println("Please enter your email or type 'exit' and press enter to Cancel");
             System.out.print("Enter Email: ");
             String input = InputReader.Get().nextLine();
 
@@ -39,12 +40,12 @@ public class LogIn {
             }
 
             else App.WriteError("Follow Format: 'for@example.com'");
-            System.out.println("Enter 'exit' to Cancel\n");
         }
     }
 
     public int PasswordInput(Staff staff) {
         while (true) {
+            System.out.println("Please enter your password or type 'exit' and press enter to Cancel");
             System.out.print("Enter Password: ");
             String input = InputReader.Get().nextLine();
 
@@ -53,13 +54,13 @@ public class LogIn {
             else if (InputReader.PasswordValidation(input)) {
                 if (input.equals(staff.GetPassword())) {
                     Data.Get().SetActiveStaff(staff);
+                    App.WriteSuccess("Log In Successful");
                     return 3;
                 }
                 else App.WriteError("Password is Incorrect");
             }
 
             else App.WriteError("20 Characters: Uppercase, Lowercase, Numbers");
-            System.out.println("Enter 'exit' to Cancel\n");
         }
     }
 }

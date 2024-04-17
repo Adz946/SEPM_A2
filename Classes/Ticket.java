@@ -16,28 +16,34 @@ public class Ticket {
     private Severity severity;     
     // sMail == Staff Email | tMail == Technician Email
 
-    private LocalDateTime dateTime;
+    private final LocalDateTime openedDT;
+    private LocalDateTime archivedDT;
     // ---------------------------------------------------------------------------------------------------- //
     public Ticket(String ID, String sMail, String tMail, String description, String sev) {
         this.ID = ID;
         this.sMail = sMail;
         this.tMail = tMail;
         this.description = description;
-        this.dateTime = LocalDateTime.now();
         
         SetSeverity(sev);  
         this.status = Status.OPEN;
+
+        this.archivedDT = null;
+        this.openedDT = LocalDateTime.now();
     }
 
-    public Ticket(String ID, String sMail, String tMail,String description, String sev, String stat, String dateTime) {
+    public Ticket(String ID, String sMail, String tMail,String description, String sev, String stat, String openedDT, String archivedDT) {
         this.ID = ID;
         this.sMail = sMail;
         this.tMail = tMail;
         this.description = description;
-        this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US));
 
         SetStatus(stat);
         SetSeverity(sev);  
+
+        this.openedDT = LocalDateTime.parse(openedDT, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US));
+        if (archivedDT != null) this.archivedDT = LocalDateTime.parse(archivedDT, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US));
+        else this.archivedDT = null;
     }
     // ---------------------------------------------------------------------------------------------------- //
     public String GetID() { return this.ID; }
@@ -65,12 +71,21 @@ public class Ticket {
         }
     }
 
-    public String GetDateTime() {
+    public String GetOpenedDT() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US);
-        return formatter.format(this.dateTime);
+        return formatter.format(this.openedDT);
+    }
+
+    public String GetArchivedDT() {
+        if (this.archivedDT == null) return "-";
+        else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US);
+            return formatter.format(this.archivedDT);
+        }
     }
     // ---------------------------------------------------------------------------------------------------- //
     public void SetTechy(String tMail) { this.tMail = tMail; }
+    public void ArchiveTicket() { this.archivedDT = LocalDateTime.now(); }
 
     public void SetSeverity(String sev) {
         switch (sev) {
@@ -105,21 +120,17 @@ public class Ticket {
                 break;
         }
     }
-
-    public void SetDateTime(String dateTime) {
-        this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
-    }
-
-    public void SetDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
     // ---------------------------------------------------------------------------------------------------- //
     public void View() {
-        System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetDateTime());
-        System.out.printf("| %-150s | %n", this.GetDesc());
+        System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-20s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetOpenedDT(), this.GetArchivedDT());
+        System.out.printf("| %-173s | %n", this.GetDesc());
     }
 
     @Override
     public String toString() {
-        return this.GetID() + "," + this.GetStaff() + "," + this.GetTechy() + "," + this.GetDesc() + "," + this.GetSeverity() + "," + this.GetStatus() + "," + this.GetDateTime();
+        String ticket = this.GetID() + "," + this.GetStaff() + "," + this.GetTechy() + "," + this.GetDesc() + "," + this.GetSeverity() + "," + this.GetStatus() + "," + this.GetOpenedDT();
+        if (this.archivedDT != null) ticket += "," + this.GetArchivedDT();
+        return ticket;
     }
     // ---------------------------------------------------------------------------------------------------- //
 }

@@ -37,13 +37,14 @@ public class Register {
     }
 
     private int ValidateRegister() {
-        if (name != "" && email != "" && mobile != "" && password != "") {
+        if (!name.equals("") && !email.equals("") && !mobile.equals("") && !password.equals("")) {
             try { 
                 Staff newStaff = new Staff(name, email, mobile, password);
                 Data.Get().AddStaff(newStaff);
                 Data.Get().SetActiveStaff(newStaff);
-                
+    
                 Reset();
+                App.WriteSuccess("Registered Successfully");
                 return 3;
             }
             catch (Exception e) { 
