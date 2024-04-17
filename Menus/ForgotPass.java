@@ -45,9 +45,15 @@ public class ForgotPass {
         System.out.print(" >> ");
         String input = InputReader.Get().nextLine();
 
-        if (input.equals("1")) { staff.SetPassword(ResetPassword()); }
-        else if (input.equals("2")) { staff = null; return 0; }
-        else { App.WriteError("Only Select Between the Available Options"); }
+        if (input.equals("1")) { 
+            staff.SetPassword(ResetPassword()); 
+            App.WriteSuccess("Password Reset Successfully");
+        }
+        else if (input.equals("2")) { 
+            staff = null; 
+            return 0; 
+        }
+        else App.WriteError("Only Select Between the Available Options");
 
         return 2;
     }

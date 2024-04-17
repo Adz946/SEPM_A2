@@ -56,31 +56,32 @@ public class Data {
     }
 
     public ArrayList<Ticket> GetStaffTickets() {
-        ArrayList<Ticket> ReturnTickets = new ArrayList<>();
-
-        for (Ticket ticket : Tickets.values()) {
-            if (ActiveStaff instanceof Technician) {
-                if (ticket.GetStatus().equals("OPEN") && ticket.GetTechy().equals(ActiveStaff.GetEmail())) { ReturnTickets.add(ticket); }
-                else if (!ticket.GetStatus().equals("OPEN")) { ReturnTickets.add(ticket); }
-            }
-            else if (ticket.GetStaff().equals(ActiveStaff.GetEmail()) && ticket.GetStatus().equals("OPEN")) { ReturnTickets.add(ticket); }
-        }
-
-        ReturnTickets.sort((t1, t2) -> t2.GetDateTime().compareTo(t1.GetDateTime()));
-        return ReturnTickets;
-    }
-    
-    public ArrayList<Ticket> GetTechOpenTickets(String techEmail) {
         ArrayList<Ticket> returnTickets = new ArrayList<>();
 
         for (Ticket ticket : Tickets.values()) {
-            if (ticket.GetTechy().equals(techEmail) && ticket.GetStatus().equals("OPEN")) {
-                returnTickets.add(ticket);
+            if (ActiveStaff instanceof Technician) {
+                if (ticket.GetStatus().equals("OPEN") && ticket.GetTechy().equals(ActiveStaff.GetEmail())) { returnTickets.add(ticket); }
+                else if (!ticket.GetStatus().equals("OPEN")) { returnTickets.add(ticket); }
+            }
+            else if (ticket.GetStaff().equals(ActiveStaff.GetEmail()) && ticket.GetStatus().equals("OPEN")) { returnTickets.add(ticket); }
+        }
+
+        returnTickets.sort((t1, t2) -> t2.GetOpenedDT().compareTo(t1.GetOpenedDT()));
+        return returnTickets;
+    }
+
+    public HashMap<String, Integer> GetTechyOpenTickets(int level) {
+        HashMap<String, Integer> ticketsByTechy = new HashMap<>();
+        for (Technician techy : GetAllTechies()) { if (techy.TechLevel() == level) { ticketsByTechy.put(techy.GetEmail(), 0); } }
+
+        for (Ticket ticket : Tickets.values()) {
+            String techy = ticket.GetTechy();
+            if (ticket.GetStatus().equals("OPEN") && ticketsByTechy.containsKey(techy)) {
+                ticketsByTechy.put(techy, ticketsByTechy.get(techy) + 1);
             }
         }
 
-        returnTickets.sort((t1, t2) -> t2.GetDateTime().compareTo(t1.GetDateTime())); 
-        return returnTickets;
+        return ticketsByTechy;
     }
     // ---------------------------------------------------------------------------------------------------- //
 }
