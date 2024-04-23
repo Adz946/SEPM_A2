@@ -24,6 +24,7 @@ public class App {
         Home home = new Home();                     // MENU 3 : Home
         TicketView view = new TicketView();         // MENU 4 : View Tickets
         TicketCreate create = new TicketCreate();   // MENU 5 : Open Ticket
+        TicketReport report = new TicketReport();   // MENU 6 : Ticket Report       
 
         int menuNum = 0;
         while (true) {
@@ -33,7 +34,8 @@ public class App {
             else if (menuNum == 3) { menuNum = home.Menu(); }
             else if (menuNum == 4) { menuNum = view.Menu(); }
             else if (menuNum == 5) { menuNum = create.Menu(); }
-            else if (menuNum == 6) { ExitProgram(); }
+            else if (menuNum == 6) { menuNum = report.Menu(); }
+            else if (menuNum == 7) { ExitProgram(); }
             else { menuNum = 0; }
 
             for (int i = 0; i < 75; i++) { System.out.print("-"); }
