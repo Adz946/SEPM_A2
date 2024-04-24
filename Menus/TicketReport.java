@@ -44,9 +44,9 @@ public class TicketReport {
 
             if (!tickets.isEmpty()) {
                 App.WriteSuccess("Printing Report");
-                System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-30s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status", "Opened Date", "Time To Close");
+                System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-30s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status", "Opened Date", "Time Taken To Close");
                 for (Ticket ticket : tickets) {
-                    String timeToClose = "Not Closed";
+                    String timeToClose = "Ticket " + ticket.GetID() + " is Still Open";
                     if (!ticket.GetArchivedDT().equals("-")) { timeToClose = TimeToClose(ticket); }
                     ticket.Report(timeToClose);
                 }   

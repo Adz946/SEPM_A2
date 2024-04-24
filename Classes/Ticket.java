@@ -130,8 +130,8 @@ public class Ticket {
     }
 
     public void Report(String timeToClose) {
-        System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-20s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetOpenedDT(), timeToClose);
-        System.out.printf("| %-181s | %n", this.GetDesc());
+        System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-30s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetOpenedDT(), timeToClose);
+        System.out.printf("| %-183s | %n", this.GetDesc());
     }
 
     @Override
