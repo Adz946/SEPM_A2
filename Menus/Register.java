@@ -40,8 +40,8 @@ public class Register {
         if (!name.equals("") && !email.equals("") && !mobile.equals("") && !password.equals("")) {
             try { 
                 Staff newStaff = new Staff(name, email, mobile, password);
-                Data.Get().AddStaff(newStaff);
-                Data.Get().SetActiveStaff(newStaff);
+                StaffData.Get().AddStaff(newStaff);
+                StaffData.Get().SetActiveStaff(newStaff);
     
                 Reset();
                 App.WriteSuccess("Registered Successfully");
@@ -71,7 +71,7 @@ public class Register {
             System.out.print("Enter Email: ");
             String input = InputReader.Get().nextLine();
 
-            if (Data.Get().GetStaff(input) == null) {
+            if (StaffData.Get().GetStaff(input) == null) {
                 if (InputReader.EmailValidation(input)) return input;
                 else App.WriteError("Follow Format: 'for@example.com'");
             }

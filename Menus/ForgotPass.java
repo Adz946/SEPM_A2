@@ -12,7 +12,7 @@ public class ForgotPass {
             String input = InputReader.Get().nextLine();
 
             if (InputReader.EmailValidation(input)) {
-                Staff staff = Data.Get().GetStaff(input);
+                Staff staff = StaffData.Get().GetStaff(input);
 
                 if (staff == null) App.WriteError("Email NOT Found");
                 else return staff;

@@ -1,7 +1,6 @@
 package Menus;
+import Functions.*;
 import Classes.Ticket;
-import Functions.Data;
-import Functions.InputReader;
 
 public class TicketCreate {
     private static String description, severity;
@@ -32,11 +31,11 @@ public class TicketCreate {
     // ---------------------------------------------------------------------------------------------------- //
     private int CreateTicket() {
         if (!description.equals("") && !severity.equals("")) {
-            String id = "T-" + Data.Get().GetNewTicketID();
-            String sMail = Data.Get().GetActiveStaff().GetEmail();     
+            String id = "T-" + TicketData.Get().GetNewTicketID();
+            String sMail = StaffData.Get().GetActiveStaff().GetEmail();     
             String tMail = App.ticketAssignment(severity);
 
-            Data.Get().AddTicket(new Ticket(id, sMail, tMail, description, severity));
+            TicketData.Get().AddTicket(new Ticket(id, sMail, tMail, description, severity));
             System.out.println("Ticket Added Successfully!");
             System.out.println("Ticket ID: " + id + " | Assigned Technician: " + tMail);
 

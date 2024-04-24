@@ -1,65 +1,107 @@
 package Menus;
-
 import Classes.*;
+import java.time.*;
 import Functions.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
-import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import java.time.format.DateTimeFormatter;
 
 public class TicketReport {
+    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static LocalDateTime start, end;
+    public TicketReport() { Reset(); }
+
+    private void Reset() {
+        start = null;
+        end = null;
+    }
+    // ---------------------------------------------------------------------------------------------------- //
     public int Menu() {
-        Scanner scanner = new Scanner(System.in);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setLenient(false); 
+        String startDT = "Not Set", endDT = "Not Set";
+        if (start != null) { startDT = format.format(start); }
+        if (end != null) { endDT = format.format(end); }
 
-        Date startDate = null, endDate = null;
+        System.out.printf("---------- Ticket Report ---------- %n" +
+            "[1] Start Date : %s %n" +
+            "[2] End Date : %s %n" +
+            "[3] Print Report %n" +
+            "[4] Go Back %n", startDT, endDT);
+        System.out.print(" >> ");
+        String input = InputReader.Get().nextLine();
 
-        while (startDate == null) {
-            System.out.println("Enter start date (dd/mm/yyyy): ");
-            String startDateStr = scanner.nextLine();
-            try {
-                startDate = sdf.parse(startDateStr);
-            } catch (ParseException e) {
-                System.out.println("Invalid date format. Please use dd/mm/yyyy format.");
-            }
-        }
+        if (input.equals("1")) { start = StartInput(); }
+        else if (input.equals("2")) { end = EndInput(); }
+        else if (input.equals("3")) { printReport(); }
+        else if (input.equals("4")) { return 3; }
+        else { App.WriteError("Only Select Between the Available Options"); }
 
-        while (endDate == null) {
-            System.out.println("Enter end date (dd/mm/yyyy): ");
-            String endDateStr = scanner.nextLine();
-            try {
-                endDate = sdf.parse(endDateStr);
-            } catch (ParseException e) {
-                System.out.println("Invalid date format. Please use dd/mm/yyyy format.");
-            }
-        }
-
-        printReport(startDate, endDate);
-        return 3;  
+        return 6;
     }
 
-    private void printReport(Date startDate, Date endDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("Ticket Report from " + sdf.format(startDate) + " to " + sdf.format(endDate));
-        System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-20s | %n", 
-            "ID", "Submitter", "Technician", "Severity", "Status", "Opened Date", "Time to Close");
+    public void printReport() {
+        if (start != null && end != null) {
+            ArrayList<Ticket> tickets = TicketData.Get().GetReportTickets(start, end);
 
-        for (Ticket ticket : Data.Get().GetAllTickets()) {
-            try {
-                Date openedDate = sdf.parse(ticket.GetOpenedDT());
-                if (!openedDate.before(startDate) && !openedDate.after(endDate)) {
-                    String timeToClose = ticket.GetArchivedDT().equals("-") ? "N/A" : getTimeToClose(openedDate, sdf.parse(ticket.GetArchivedDT())) + " days";
-                    ticket.View(); 
+            if (!tickets.isEmpty()) {
+                App.WriteSuccess("Printing Report");
+                System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-30s | %n", "ID", "Staff Sent By", "Technician", "Severity", "Status", "Opened Date", "Time To Close");
+                for (Ticket ticket : tickets) {
+                    String timeToClose = "Not Closed";
+                    if (!ticket.GetArchivedDT().equals("-")) { timeToClose = TimeToClose(ticket); }
+                    ticket.Report(timeToClose);
+                }   
+            }
+            else {
+                App.WriteError("No Tickets Found Between " + format.format(start) + " and " + format.format(end)); 
+            }
+        }
+        else { App.WriteError("Enter ALL Fields"); }
+    }
+    // ---------------------------------------------------------------------------------------------------- //
+    public LocalDateTime StartInput() {
+        while (true) {
+            System.out.println("Use the Correct Format: [dd/mm/yyyy]");
+            System.out.print("Enter Start Date: ");
+            String input = InputReader.Get().nextLine();
+
+            if (InputReader.DateValidation(input)) {
+                try {
+                    LocalDate date = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    return date.atTime(00, 00, 00);
                 }
-            } catch (ParseException e) {
-                System.out.println("Error parsing date for ticket " + ticket.GetID());
+                catch (Exception e) { App.WriteError("Invalid Format"); }
             }
+            else App.WriteError("Invalid Format");
         }
     }
 
-    private String getTimeToClose(Date open, Date close) {
-        long days = (close.getTime() - open.getTime()) / (1000 * 60 * 60 * 24);
-        return String.valueOf(days);
+    public LocalDateTime EndInput() {
+        while (true) {
+            System.out.println("Use the Correct Format: [dd/mm/yyyy]");
+            System.out.print("Enter End Date: ");
+            String input = InputReader.Get().nextLine();
+
+            if (InputReader.DateValidation(input)) {
+                try {
+                    LocalDate date = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    return date.atTime(23, 59, 59);
+                }
+                catch (Exception e) { App.WriteError("Invalid Format"); }
+            }
+            else App.WriteError("Invalid Format");
+        }
     }
+
+    public String TimeToClose(Ticket ticket) {
+        Instant opened = ticket.GetDT_Opened().atZone(ZoneId.systemDefault()).toInstant();
+        Instant archived = ticket.GetDT_Archived().atZone(ZoneId.systemDefault()).toInstant();
+
+        long minutesBetween = Duration.between(opened, archived).toMinutes();
+        long days = TimeUnit.MINUTES.toDays(minutesBetween);
+        long hours = TimeUnit.MINUTES.toHours(minutesBetween) % 24;
+        long minutes = minutesBetween % 60;
+
+        return days + " days, " + hours + " hours, " + minutes + " minutes";
+    }
+    // ---------------------------------------------------------------------------------------------------- //
 }

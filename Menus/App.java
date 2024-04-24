@@ -1,16 +1,9 @@
 package Menus;
 import Functions.*;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
+import java.time.*;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.time.format.DateTimeFormatter;
 // ---------------------------------------------------------------------------------------------------- //
 public class App {
     private static Random random = new Random();
@@ -27,6 +20,7 @@ public class App {
         TicketReport report = new TicketReport();   // MENU 6 : Ticket Report       
 
         int menuNum = 0;
+
         while (true) {
             if (menuNum == 0) {  menuNum = login.Menu(); }
             else if (menuNum == 1) { menuNum = register.Menu(); }
@@ -45,7 +39,7 @@ public class App {
     // ---------------------------------------------------------------------------------------------------- //
     public static String ticketAssignment(String severity) {
         int severityLevel = severity.equals("HIGH") ? 2 : 1;
-        HashMap<String, Integer> openTickets = Data.Get().GetTechyOpenTickets(severityLevel);
+        HashMap<String, Integer> openTickets = TicketData.Get().GetTechyOpenTickets(severityLevel);
 
         Optional<Integer> minValue = openTickets.values().stream().min(Integer::compare);
         if (minValue.isPresent()) {
