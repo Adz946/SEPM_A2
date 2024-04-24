@@ -3,8 +3,20 @@
 # TicketApp User Guide
 
 # User Manual
+
+Welcome to Ticket-Master! <br>
+The grand new Ticket Management System! Designed to feel simple and give anyone looking to open a ticket full control. <br><br>
  
-Welcome to TicketApp! This guide provides step-by-step instructions on how to start the application, log in, register a new account, and view tickets. Whether you are a new user or returning, this guide will help you navigate through the application's features.
+This guide provides step-by-step instructions on how to: <br>
+> Start the App <br>
+> Log In <br>
+> Register <br>
+> Reset Passwords <br>
+> View Tickets <br>
+> Create Tickets <br>
+> Generate Ticket Reports <br>
+
+Whether you're a new user or returning, this guide will help <i>you</i> become a Ticket-Master!
  
 ## Table of Contents
  
@@ -15,37 +27,53 @@ Welcome to TicketApp! This guide provides step-by-step instructions on how to st
 5. [Troubleshooting](#troubleshooting)
  
 ## Getting Started
+Using the [link](https://mydesktop.rmit.edu.au/) provided, follow these steps to open up <strong>RMIT Desktop</strong> and the <strong>Eclipse IDE</strong>
 
-Opening RMIT Desktop:
-1. Log into RMIT desktop
-2. Open the Apps tab and select Eclipse IDE 2022-12 (Note this may take a couple minutes to load.
-3. Go back to RMIT desktop and open up the Desktops tab and select RMIT desktop. 
-4. From the desktop, access the project .zip folder. You can download this via Sharepoint or similar. 
-5. Once downloaded, store the .zip folder in the drive named after your user ID i.e. sxxxxxxx H: Drive
-6. Unzip the folder in this location. 
+### Getting the SEPM_A2 Zip
+On GitHub, open the [Repository](https://github.com/Adz946/SEPM_A2) and download a zip of the <i>Main</i> Branch onto your computer (Ensure it is saved to a path you know well)
 
-Using Eclipse:
-1. Open Eclipse again, and select the default workspace, which is also located under the drive with your user ID.
-2. Select File > Open Projects from File System.
-3. For the Import source, select the Directory button, and point the program to the unzipped folder that you downloaded earlier. 
-4. Give the program a few moments, the folder that you have just specified will have a check box next to it, but is currently greyed out. This is normal while the program loads the files.
-5. Once the files have loaded into Eclipse, the folder that you imported will be selected. Click on Finish at the bottom of the page. 
+### Open RMIT Desktop
+1. Log In using your RMIT Credentials
+2. Open up the <strong>Desktops</strong> Tab and find <i>RMIT Desktop</i>
+3. Open Desktop in a new tab (Note: This will take time)
 
-Runtime specification:
-1. You should now see a Project Explorer window (If not, you may see a welcome window. You can close this by clicking on the x at the top right of that window. 
-2. Expand the folder which you have specified.
-3. Right click on JRE System Library, and hover over Build Path, and click Configure Build Path.
-4. Click on Java Build Path if it is not already highlighted on the left pane, and in the center window highlight JRE Sytem Library. 
-5. Once JRE System Library is highlighted, click on the Edit button on the right of the window. 
-6. Click on the Execution Environment option at the top of this window and select JavaSE-1.8 (jre)
-7. Then click on Finish at the bottom of this pop up window.
-8. Finally, click Apply and Close.
-9. You should now see the folder that you imported into Eclipse, and underneath you should see JRE System Library [JavaSE- 1.8]
+### Open Eclipse IDE
+1. Stay Logged in with your RMIT Credentials
+2. Open up the <strong>Apps</strong> Tab and find <i>Eclipse IDE 2022-12</i>
+3. Open Eclipse IDE in a new tab (Note: This takes a while)
 
-Run the code:
-1. To run the code, expand the SEPM_A2 folder on the left hand pane, then expand the default package, and double click on Main.java.
-2. Then, press the green play button at the top of the window, or press ctrl and F11. 
-3. You will now see the program's output in the console tab at the bottom of the screen.
+### Setting Up Your Files
+1. Head to your RMIT Desktop Tab
+2. Drag & Drop your SEPM_A2-Main zip file into the RMIT Desktop, where you will be prompted to select a save path
+3. Select it and wait for your zip to copy over
+4. Unzip your SEPM_A2-Main zip file into your preferred directory
+5. Wait for this to finish
+
+### Setting Up Eclipse
+1. Go to your Eclipse IDE Tab and open up a new project using the top-left tab (File -> Open Projects From File System)
+2. On the <strong>Import Source</strong> section press the Directory button on the right-hand side
+3. Find the Unzipped folder located in the directory you've specified
+4. Select that folder
+5. Press <strong>Finish</strong> on the bottom-right
+
+### Runtime 
+There is the chance that Eclipse IDE needs to be configured to properly handle the app, to do so follow these steps <br>
+
+1. Expand the folder
+2. Right Click on the JRE System Library
+3. Hover over the Build Path option and then select Configure Build Path
+4. You will need to be on the <strong>Libraries</strong> Section
+5. Press the 'Edit' Button on the right-hand side of the window
+6. Select <strong>Execution Environment</strong>
+7. Scroll through the list of JRE Versions to select <strong>JavaSE-1.8 (jre)</strong>
+8. Select Finish
+9. Select Apply & Close
+
+### Run The Code
+1. Expand the main folder to find the default package, where you will find <i>Main.java</i>
+2. Double Click Main.java to select it
+3. Press the Green Play Button on the top-left of the window
+4. Manage Your Tickets!
  
 ## Logging In
  
