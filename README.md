@@ -20,7 +20,7 @@ Whether you're a new user or returning, this guide will help <i>you</i> become a
  
 1. [Getting Started](#getting-started)
 2. [Logging In](#logging-in)
-3. [Registering a New Account](#registering-a-new-account)
+3. [Registering a New Account](#registering-an-account)
 4. [Viewing Tickets](#viewing-tickets)
 5. [Troubleshooting](#troubleshooting)
  
@@ -76,7 +76,7 @@ There is the chance that Eclipse IDE needs to be configured to properly handle t
 ## Logging In
 
 ### Menu
-When the app loads, you will be greeted by the LogIn Screen, where you will have the following option, <br>
+When the app loads, you will be greeted by the LogIn Screen, <br>
 ---------- Log In ---------- <br>
 [1] Log In <br>
 [2] Register <br>
@@ -109,14 +109,18 @@ Password: _Malik-Al-Igbeer_45? <br>
 Email: s.syne@company.com <br>
 Password: 01234ABCDE56789fghij
  
-## Registering a New Account
- 
-If you are a new user, you will need to register a new account:
- 
-1. From the main menu, select the "Register" option by entering `2`.
-2. You will be prompted to enter your full name, email address, mobile number, and password, one at a time. Follow the on-screen instructions for the format requirements for each field.
-3. After all fields are correctly filled, select the "Register" option to complete your registration. You will receive a confirmation that your account has been created.
-4. You can now log in using your registered email and password.
+## Registering an Account
+A new user will need to register an account, where they will be prompted to enter the following: 
+### Name
+Format = First Name is required with the Middle and Last Names being optional and seperated by spaces <br>
+### Email
+Format = example@gmail.com <br>
+### Mobile
+Format = 04XX XXX XXX <br>
+### Password
+Format = 20 Characters Minimum, with at least 1 uppercase charater, lowercase character, and number. <i>Special chars are encouraged!</i> <br><br>
+
+With all user prompts set to go, you will be logged into the app's Home Menu. <strong>You can now log in using your registered email and password</strong>
  
 ## Viewing Tickets
  
