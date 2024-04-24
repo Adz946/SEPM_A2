@@ -19,10 +19,9 @@ Whether you're a new user or returning, this guide will help <i>you</i> become a
 ## Table of Contents
  
 1. [Getting Started](#getting-started)
-2. [Logging In](#logging-in)
-3. [Registering a New Account](#registering-an-account)
-4. [Viewing Tickets](#viewing-tickets)
-5. [Troubleshooting](#troubleshooting)
+2. [LogIn Menu](#loggin-menu)
+3. [Home Menu](#home-menu)
+4. [Troubleshooting](#troubleshooting)
  
 ## Getting Started
 Using the [link](https://mydesktop.rmit.edu.au/) provided, follow these steps to open up <strong>RMIT Desktop</strong> and the <strong>Eclipse IDE</strong>
@@ -73,7 +72,7 @@ There is the chance that Eclipse IDE needs to be configured to properly handle t
 3. Press the Green Play Button on the top-left of the window
 4. Manage Your Tickets!
  
-## Logging In
+## LogIn Menu
 
 ### Menu
 When the app loads, you will be greeted by the LogIn Screen, <br>
@@ -87,11 +86,20 @@ When the app loads, you will be greeted by the LogIn Screen, <br>
 The 1st option will enable a user with an existing account to log into the app and use its ticket managing features. <br>
 To log in, you will need your associated email and the password linked to that email.
 
-### Option 2: Register
+### Option 2: Registering an Account
 The 2nd option will enable a user without an account to register to the app before allowing them to use its ticket managing features. <br>
-To register, you will need to associate an email, a password, your mobile number (in the format: 04XX XXX XXX) and your name (where your 1st is required with the middle and last names being optional and seperated by spaces).
+To register, you will need to set up the following user details: <br>
 
-### Option 3: Forgot Password
+#### Name
+Format = First Name is required with the Middle and Last Names being optional and seperated by spaces <br>
+#### Email
+Format = example@gmail.com <br>
+#### Mobile
+Format = 04XX XXX XXX <br>
+#### Password
+Format = 20 Characters Minimum, with at least 1 uppercase charater, lowercase character, and number. <i>Special chars are encouraged!</i>
+
+### Option 3: Password Resetting
 If you've forgotten your password, you may be able to reset it by selecting the 3rd option, then you may be able to use the ticket managing features. <br>
 To be able to reset your password, you will require your associated email and the mobile number linked to it.
 
@@ -108,29 +116,49 @@ Password: _Malik-Al-Igbeer_45? <br>
 <strong>Staff</strong> <br>
 Email: s.syne@company.com <br>
 Password: 01234ABCDE56789fghij
- 
-## Registering an Account
-A new user will need to register an account, where they will be prompted to enter the following: 
-### Name
-Format = First Name is required with the Middle and Last Names being optional and seperated by spaces <br>
-### Email
-Format = example@gmail.com <br>
-### Mobile
-Format = 04XX XXX XXX <br>
-### Password
-Format = 20 Characters Minimum, with at least 1 uppercase charater, lowercase character, and number. <i>Special chars are encouraged!</i> <br><br>
 
-With all user prompts set to go, you will be logged into the app's Home Menu. <strong>You can now log in using your registered email and password</strong>
+## Home Menu
+
+### Menu
+After a successful LogIn, you will be greeted by the Home screen, <br>
+#### Technicians
+---------- Zayn Malik ---------- <br>
+[1] View Tickets <br>
+[2] Generate Report <br>
+[3] Log Out <br>
+[4] Exit 
+#### Regular Staff
+---------- Sam Syne ---------- <br>
+[1] View Tickets <br>
+[2] Open Ticket <br>
+[3] Log Out <br>
+[4] Exit 
+ >> 
+
+### Option 1: Viewing Tickets
+#### Technician
+A technician will be able to view not just their <b>Open</b> tickets, but also any closed / archived ticket.
+#### Regular Staff
+Any other staff member will only be able to see their <b>Open</b> tickets, meaning that any of their closed tickets will not be visible.
  
-## Viewing Tickets
- 
-To view your tickets:
- 
-1. Once logged in, navigate to the ticket viewing section as directed by the application's workflow.
-2. If there are open tickets associated with your account, they will be displayed in a list with detailed information.
-3. To return to the previous menu, type `exit` and press enter.
+### Option 2: Generate a Report [Technician Only]
+A technician will be able to generate a report of <b>All</b> tickets from a selected start and end period (from the beginning of the start date to the very end of the end date).
+
+### Option 2: Opening a Ticket [Regular Staff Only]
+Any regular staff can open a ticket, where they will be required to select the severity of that ticket (LOW, MEDIUM, HIGH) and describe what the issue is. <br>
+<i>Note: The technician assigned to fix your issue will be random!</i>
+
+### Option 3: Log Out
+Logging out will take you back to the LogIn Screen
+
+### Option 4: Exit
+When exiting the application, all changes (such as new tickets or a modified ticket) will be saved onto our storage files. <br>
+<strong>Remember to exit the app to save!</strong>
+
+### Ticket Modification
+Accessed via the 1st option (Ticket View), technicians are able to modify the severity level of a ticket (which may change the technician solving the issue) and they can also change the status of a ticket (from closing to opening, all is possible with Ticket-Master!). <br>
+<i>Other staff members may cancel a ticket if they wish</i>
  
 ## Troubleshooting
- 
 If you encounter any issues or have questions about using the application, please refer to this guide or contact the support team for assistance.
 
