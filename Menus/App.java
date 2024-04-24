@@ -29,8 +29,10 @@ public class App {
             else if (menuNum == 4) { menuNum = view.Menu(); }
             else if (menuNum == 5) { menuNum = create.Menu(); }
             else if (menuNum == 6) { menuNum = report.Menu(); }
-            else if (menuNum == 7) { ExitProgram(); }
-            else { menuNum = 0; }
+            else { 
+                App.WriteError("An Error Has Occured. Opening LogIn Page");
+                menuNum = 0; 
+            }
 
             for (int i = 0; i < 75; i++) { System.out.print("-"); }
             System.out.println();
@@ -61,10 +63,10 @@ public class App {
         return hoursBetween > 24;
     }
 
-    public static void WriteError(String msg) { System.out.println("\033[1;31m [" + msg + "] \033[0m"); }
+    public static void WriteError(String msg) { System.out.println("\033[1;31m [" + msg + "] \033[0m \n"); }
     // RED TEXT: \033[1:31m | RESET: \033[0;0m
 
-    public static void WriteSuccess(String msg) { System.out.println("\033[1;32m [" + msg + "] \033[0m"); }
+    public static void WriteSuccess(String msg) { System.out.println("\033[1;32m [" + msg + "] \033[0m \n"); }
     // GREEN TEXT: \033[1:32m | RESET: \033[0;0m
 
     public static void ExitProgram() {

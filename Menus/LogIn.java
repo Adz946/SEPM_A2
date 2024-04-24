@@ -18,7 +18,7 @@ public class LogIn {
         }
         else if (input.equals("2")) { return 1; }
         else if (input.equals("3")) { return 2; }
-        else if (input.equals("4")) { return 6; }
+        else if (input.equals("4")) { App.ExitProgram(); }
         else { App.WriteError("Only Select Between the Available Options"); }
 
         return 0;
