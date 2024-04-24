@@ -15,24 +15,20 @@ public class Register {
     }
     // ---------------------------------------------------------------------------------------------------- //
     public int Menu() {
-        System.out.printf("---------- Register ---------- %n" +
-            "[1] Name : %s %n" +
-            "[2] Email : %s %n" +
-            "[3] Mobile : %s %n" +
-            "[4] Password : %s %n" +
-            "[5] Register %n" +
-            "[6] Go Back %n", name, email, mobile, password);
-        System.out.print(" >> ");
-        String input = InputReader.Get().nextLine();
-
-        if (input.equals("1")) { name = NameInput(); }
-        else if (input.equals("2")) { email = EmailInput(); }
-        else if (input.equals("3")) { mobile = MobileInput(); }
-        else if (input.equals("4")) { password = PassInput(); }
-        else if (input.equals("5")) { return ValidateRegister(); }
-        else if (input.equals("6")) { Reset(); return 0; }
-        else { App.WriteError("Only Select Between the Available Options"); }
-
+        System.out.print("---------- Register ---------- \n");
+        System.out.print("Please prepare to enter your user information. \nType 'exit' at any time to return to the previous menu.\n");
+        name = NameInput();
+        email = EmailInput();
+        mobile = MobileInput();
+        password = PassInput();
+        if (ValidateRegister() == 1) {
+            System.out.print("Your user information could not be validated. Please follow to prompts to re-enter your information.");
+            Reset();
+            Menu();
+            }
+        else if (ValidateRegister() == 3){
+            return 3;
+        }
         return 1;
     }
 
@@ -60,7 +56,9 @@ public class Register {
         while (true) {
             System.out.print("Enter Full Name: ");
             String input = InputReader.Get().nextLine();
-
+            if (input == "exit"){
+                Reset();  
+            }
             if (InputReader.NameValidation(input)) return input;
             else App.WriteError("Please enter your First, Middle (optional) and Last Name, each capitalised with a space between.");
         }
@@ -70,7 +68,9 @@ public class Register {
         while (true) {
             System.out.print("Enter Email: ");
             String input = InputReader.Get().nextLine();
-
+            if (input == "exit"){
+                Reset();  
+            }
             if (Data.Get().GetStaff(input) == null) {
                 if (InputReader.EmailValidation(input)) return input;
                 else App.WriteError("Follow Format: 'for@example.com'");
@@ -83,6 +83,9 @@ public class Register {
         while (true) {
             System.out.print("Enter Mobile: ");
             String input = InputReader.Get().nextLine();
+            if (input == "exit"){
+                Reset();  
+            }
 
             if (InputReader.MobileValidation(input)) return input;
             else App.WriteError("Follow Format: '04XX XXX XXX'");
@@ -93,6 +96,9 @@ public class Register {
         while (true) {
             System.out.print("Enter Password: ");
             String input = InputReader.Get().nextLine();
+            if (input == "exit"){
+                Reset();  
+            }
 
             if (InputReader.PasswordValidation(input)) return input;
             else App.WriteError("20 Characters: Uppercase, Lowercase, Numbers");
