@@ -71,6 +71,9 @@ public class Ticket {
         }
     }
 
+    public LocalDateTime GetDT_Opened() { return this.openedDT; }
+    public LocalDateTime GetDT_Archived() { return this.archivedDT; }
+
     public String GetOpenedDT() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.US);
         return formatter.format(this.openedDT);
@@ -124,6 +127,11 @@ public class Ticket {
     public void View() {
         System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-20s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetOpenedDT(), this.GetArchivedDT());
         System.out.printf("| %-173s | %n", this.GetDesc());
+    }
+
+    public void Report(String timeToClose) {
+        System.out.printf("| %-5s | %-45s | %-45s | %-10s | %-10s | %-20s | %-20s | %n", this.GetID(), this.GetStaff(), this.GetTechy(), this.GetSeverity(), this.GetStatus(), this.GetOpenedDT(), timeToClose);
+        System.out.printf("| %-181s | %n", this.GetDesc());
     }
 
     @Override

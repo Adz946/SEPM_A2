@@ -48,5 +48,10 @@ public class InputReader {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{20,}$";
         return Validation(input, regex);
     }
+
+    public static synchronized boolean DateValidation(String input) {
+        String regex = "^\\d{2}/\\d{2}/\\d{4}$";
+        return Validation(input, regex);
+    }
     // ---------------------------------------------------------------------------------------------------- //
 }

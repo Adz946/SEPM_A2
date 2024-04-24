@@ -45,12 +45,12 @@ public class FileHandling {
 
                     if (user.length == 5) { 
                         staff = new Technician(user[0], user[1], user[2], user[3], Integer.parseInt(user[4]));
-                        Data.Get().AddTechy((Technician)staff); 
+                        StaffData.Get().AddTechy((Technician)staff); 
                     }    
                     else if (user.length == 4) { staff = new Staff(user[0], user[1], user[2], user[3]); }  
                     else App.WriteError("User Reading Error");
                     
-                    Data.Get().AddStaff(staff);  
+                    StaffData.Get().AddStaff(staff);  
                 }
             }
         } else throw new FileNotFoundException("Users CSV was NOT Found");
@@ -71,9 +71,9 @@ public class FileHandling {
                     if ((status.equals("RESOLVED") || status.equals("UNRESOLVED")) && App.DateCheck(ticket[6])) status = "ARCHIVED";
 
                     if (ticket.length == 8) { 
-                        Data.Get().AddTicket(new Ticket(ticket[0], ticket[1], ticket[2], ticket[3], ticket[4], status, ticket[6], ticket[7]));
+                        TicketData.Get().AddTicket(new Ticket(ticket[0], ticket[1], ticket[2], ticket[3], ticket[4], status, ticket[6], ticket[7]));
                     } else if (ticket.length == 7) {
-                        Data.Get().AddTicket(new Ticket(ticket[0], ticket[1], ticket[2], ticket[3], ticket[4], status, ticket[6], null));
+                        TicketData.Get().AddTicket(new Ticket(ticket[0], ticket[1], ticket[2], ticket[3], ticket[4], status, ticket[6], null));
                     }
                     else App.WriteError("Ticket Reading Error");
                 }
@@ -97,7 +97,7 @@ public class FileHandling {
         if (file.exists()) {
             try (PrintWriter writer = new PrintWriter(new FileWriter(file, false))) {
                 writer.println("Name,Email,Mobile,Password,Level");
-                for (Staff staff : Data.Get().GetAllStaff()) { writer.println(staff.toString()); }
+                for (Staff staff : StaffData.Get().GetAllStaff()) { writer.println(staff.toString()); }
             }
         } else throw new FileNotFoundException("Users CSV was NOT Found");
    }
@@ -109,7 +109,7 @@ public class FileHandling {
         if (file.exists()) {
             try (PrintWriter writer = new PrintWriter(new FileWriter(file, false))) {
                 writer.println("ID,SMail,TMail,Description,Severity,Status,OpenedDT,ArchivedDT");
-                for (Ticket ticket : Data.Get().GetAllTickets()) { writer.println(ticket.toString()); }
+                for (Ticket ticket : TicketData.Get().GetAllTickets()) { writer.println(ticket.toString()); }
             }
         } else throw new FileNotFoundException("Tickets CSV was NOT Found");
 	}

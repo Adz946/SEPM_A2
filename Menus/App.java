@@ -1,16 +1,9 @@
 package Menus;
 import Functions.*;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
+import java.time.*;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.time.format.DateTimeFormatter;
 // ---------------------------------------------------------------------------------------------------- //
 public class App {
     private static Random random = new Random();
@@ -24,8 +17,10 @@ public class App {
         Home home = new Home();                     // MENU 3 : Home
         TicketView view = new TicketView();         // MENU 4 : View Tickets
         TicketCreate create = new TicketCreate();   // MENU 5 : Open Ticket
+        TicketReport report = new TicketReport();   // MENU 6 : Ticket Report       
 
         int menuNum = 0;
+
         while (true) {
             if (menuNum == 0) {  menuNum = login.Menu(); }
             else if (menuNum == 1) { menuNum = register.Menu(); }
@@ -33,8 +28,11 @@ public class App {
             else if (menuNum == 3) { menuNum = home.Menu(); }
             else if (menuNum == 4) { menuNum = view.Menu(); }
             else if (menuNum == 5) { menuNum = create.Menu(); }
-            else if (menuNum == 6) { ExitProgram(); }
-            else { menuNum = 0; }
+            else if (menuNum == 6) { menuNum = report.Menu(); }
+            else { 
+                App.WriteError("An Error Has Occured. Opening LogIn Page");
+                menuNum = 0; 
+            }
 
             for (int i = 0; i < 75; i++) { System.out.print("-"); }
             System.out.println();
@@ -43,7 +41,7 @@ public class App {
     // ---------------------------------------------------------------------------------------------------- //
     public static String ticketAssignment(String severity) {
         int severityLevel = severity.equals("HIGH") ? 2 : 1;
-        HashMap<String, Integer> openTickets = Data.Get().GetTechyOpenTickets(severityLevel);
+        HashMap<String, Integer> openTickets = TicketData.Get().GetTechyOpenTickets(severityLevel);
 
         Optional<Integer> minValue = openTickets.values().stream().min(Integer::compare);
         if (minValue.isPresent()) {
@@ -65,10 +63,10 @@ public class App {
         return hoursBetween > 24;
     }
 
-    public static void WriteError(String msg) { System.out.println("\033[1;31m [" + msg + "] \033[0m"); }
+    public static void WriteError(String msg) { System.out.println("\033[1;31m [" + msg + "] \033[0m \n"); }
     // RED TEXT: \033[1:31m | RESET: \033[0;0m
 
-    public static void WriteSuccess(String msg) { System.out.println("\033[1;32m [" + msg + "] \033[0m"); }
+    public static void WriteSuccess(String msg) { System.out.println("\033[1;32m [" + msg + "] \033[0m \n"); }
     // GREEN TEXT: \033[1:32m | RESET: \033[0;0m
 
     public static void ExitProgram() {

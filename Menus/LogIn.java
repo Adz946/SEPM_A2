@@ -18,7 +18,7 @@ public class LogIn {
         }
         else if (input.equals("2")) { return 1; }
         else if (input.equals("3")) { return 2; }
-        else if (input.equals("4")) { return 6; }
+        else if (input.equals("4")) { App.ExitProgram(); }
         else { App.WriteError("Only Select Between the Available Options"); }
 
         return 0;
@@ -33,7 +33,7 @@ public class LogIn {
             if (input.equals("exit")) return null;
 
             else if (InputReader.EmailValidation(input)) {
-                Staff staff = Data.Get().GetStaff(input);
+                Staff staff = StaffData.Get().GetStaff(input);
 
                 if (staff == null) App.WriteError("Email NOT Found");
                 else return staff;
@@ -53,7 +53,7 @@ public class LogIn {
 
             else if (InputReader.PasswordValidation(input)) {
                 if (input.equals(staff.GetPassword())) {
-                    Data.Get().SetActiveStaff(staff);
+                    StaffData.Get().SetActiveStaff(staff);
                     App.WriteSuccess("Log In Successful");
                     return 3;
                 }
