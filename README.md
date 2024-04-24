@@ -1,6 +1,4 @@
-# SEPM_A2
-
-# TicketApp User Guide
+# Ticket-Master User Guide
 
 # User Manual
 
@@ -76,20 +74,39 @@ There is the chance that Eclipse IDE needs to be configured to properly handle t
 4. Manage Your Tickets!
  
 ## Logging In
- 
-To log into your account:
- 
-1. From the main menu, select the "Log In" option by entering `1`.
-2. When prompted, enter your registered email address. If you wish to cancel, type `exit`.
-3. Next, you will be asked to enter your password. Make sure it meets the required format. To cancel, type `exit`.
-4. If both your email and password are correct, you will be successfully logged into the system.
 
-Example Technician
-User: h.styles@company.com
-Password: 01234_xX_StyleS_Xx_56789
+### Menu
+When the app loads, you will be greeted by the LogIn Screen, where you will have the following option, <br>
+---------- Log In ---------- <br>
+[1] Log In <br>
+[2] Register <br>
+[3] Forgot Password <br>
+[4] Exit
 
-Example Staff
-User: s.syne@company.com
+### Option 1: Logging In
+The 1st option will enable a user with an existing account to log into the app and use its ticket managing features. <br>
+To log in, you will need your associated email and the password linked to that email.
+
+### Option 2: Register
+The 2nd option will enable a user without an account to register to the app before allowing them to use its ticket managing features. <br>
+To register, you will need to associate an email, a password, your mobile number (in the format: 04XX XXX XXX) and your name (where your 1st is required with the middle and last names being optional and seperated by spaces).
+
+### Option 3: Forgot Password
+If you've forgotten your password, you may be able to reset it by selecting the 3rd option, then you may be able to use the ticket managing features. <br>
+To be able to reset your password, you will require your associated email and the mobile number linked to it.
+
+### Option 4: Exit
+When exiting the application, all changes (such as a password reset or a new user) will be saved onto our storage files. <br>
+<strong>Remember to exit the app to save!</strong>
+ 
+### Example Logins
+
+<strong>Technician</strong> <br>
+Email: z.malik@company.com <br>
+Password: _Malik-Al-Igbeer_45? <br>
+
+<strong>Staff</strong> <br>
+Email: s.syne@company.com <br>
 Password: 01234ABCDE56789fghij
  
 ## Registering a New Account
